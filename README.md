@@ -7,17 +7,16 @@
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝.theme
   ```
 ---
-
 # <p align="center"> DarkarchWM </p>
 
 ##### <p align="center"> This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/) </p>
 
 ### <p align="center"> View multilingual documentation: </p>
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
+---
 
-<p align="center">
   | type | type | type |
   | :------: | :------: | :------: |
   | type | type | type |
-</p>
+
 
