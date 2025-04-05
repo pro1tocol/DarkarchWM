@@ -14,8 +14,6 @@
 ### <p align="center"> Installation documentation: </p>
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
-## See the Theme
-
 ## Build the Environment
 
   | OS | Arch Linux | X86/x86_64/ARM |
@@ -26,7 +24,10 @@
   | Window Lander | 0.5.3 | lxdm |
   | Window Manager | 1.3.7 | Fluxbox |
 
+## See the Theme
 
+![image](./png/firefox.png)
+![image](./png/file.png)
   
 
 
