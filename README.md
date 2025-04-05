@@ -19,7 +19,7 @@
   | OS Standards | ArchLinux | X86/x86_64/ARM |
   | :------ | :------ | :------ |
   | Linux Kernel | 6.13.8 | zen |
-  | Shell Environment | zsh/bash | xterm |
+  | Shell | zsh/bash | xterm |
   | Displays | 21.1.16 | X11 |
   | Window Lander | 0.5.3 | lxdm |
   | Window Manager | 1.3.7 | Fluxbox |
