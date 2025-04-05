@@ -1,5 +1,5 @@
 
-<center># DarkarchWM</center>
+<p align="center"># DarkarchWM</p>
 
 ##### This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/) 
 
