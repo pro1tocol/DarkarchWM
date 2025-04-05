@@ -32,7 +32,7 @@
   | Sound | 1.2.13 | alsa-lib |
   | Bluetooth | 5.82 | bluez |
 
-## See the Theme
+## See
 
 ![image](./png/firefox.png)
   
