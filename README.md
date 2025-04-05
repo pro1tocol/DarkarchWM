@@ -16,9 +16,9 @@
 
 ## Installation
 
-  | OS standards | ArchLinux | X86/x86_64/ARM |
-  | :------: | :------: | :------: |
-  | type | type | type |
-  | type | type | type |
+  | OS Standards | ArchLinux | X86/x86_64/ARM |
+  | :------ | :------ | :------ |
+  | Linux Kernel | 6.13.8 | zen |
+  | Shell Environment | - | zsh/bash |
 
 
