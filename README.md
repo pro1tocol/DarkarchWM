@@ -21,7 +21,7 @@
 
 ## Build the Environment
 
-  | OS | Arch Linux | X86/x86_64/ARM |
+  | OS | Arch Linux | x86_64/ARM |
   | :------ | :------ | :------ |
   | Linux Kernel | 6.13.8 | linux-zen |
   | Shell | zsh/bash | xterm |
