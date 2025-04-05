@@ -28,10 +28,10 @@
       [submenu] (Style) {Choose a style...}
           [stylesdir] (/usr/share/fluxbox/styles)
       [end]
-#[submenu] (用户主题) {Choose a style...}
+#[submenu] (User themes) {Choose a style...}
 #      [stylesdir] (~/.fluxbox/styles)
 #[end]
-      #[commanddialog] (执行命令)
+      #[commanddialog] (Run Code)
 #      [exec] (About) {(fluxbox -v; fluxbox -info | sed 1d) | xmessage -file - -center}
 [end]
       [exit] (Exit)
