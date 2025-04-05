@@ -1,10 +1,4 @@
 [submenu] (虚拟化)
-      [submenu] (平台指令)
-          [exec] (VMWare虚拟化状态) {xterm -e sh -c 'systemctl status vmware-usbarbitrator.service && systemctl status vmware-networks.service ; bash'}
-          [exec] (VMWare虚拟化启动) {xterm -e sh -c 'vmware-enable ; bash'}
-          [exec] (VMWare虚拟化停止) {xterm -e sh -c 'vmware-disable ; bash'}
-      [end]
-      [exec] (工作区控制台) {vmware}
-      [exec] (网络编辑器) {xterm -e sh -c 'vmware-netcfg'}
-      [exec] (视窗模拟器) {/opt/apps/net.winegame.client/files/bin/winegame}
+       # 你可以将容器的启动方式在此处设置
+       #[exec] (docker) {}
 [end]
