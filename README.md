@@ -1,5 +1,5 @@
-# DarkarchWM
-##### This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/)
+<center> # DarkarchWM </center>
+<center> ##### This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/) </center>
 ``` bash
 ██████╗  █████╗ ██████╗ ██╗  ██╗ █████╗ ██████╗  ██████╗██╗  ██╗██╗    ██╗███╗   ███╗
 ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║██║    ██║████╗ ████║
