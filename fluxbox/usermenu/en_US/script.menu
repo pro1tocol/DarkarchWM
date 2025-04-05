@@ -1,24 +1,4 @@
 [submenu] (Script)
-      [submenu] (Docker)
-          #[exec] (所有容器关闭) {xterm -e sh -c 'container-alldown ; bash'}
-          [exec] (Docker-status) {xterm -e sh -c 'systemctl status docker.service ; bash'}
-          [exec] (Docker-enable) {xterm -e sh -c 'docker-enable ; bash'}
-          [exec] (Docker-disable) {xterm -e sh -c 'docker-disable ; bash'}
-          [exec] (Utun-proxy-start) {xterm -e sh -c 'docker-clash-enable ; bash'}
-          [exec] (Utun-proxy-stop) {xterm -e sh -c 'docker-clash-disable ; bash'}
-          #[exec] (容器Socks代理启动) {xterm -e sh -c 'docker-clash-nginx-enable ; bash'}
-          #[exec] (容器Socks代理关闭) {xterm -e sh -c 'docker-clash-nginx-disable ; bash'}
-          #[exec] (容器WEB站点启动) {xterm -e sh -c 'hexo-client-enable ; bash'}
-          #[exec] (容器WEB站点关闭) {xterm -e sh -c 'hexo-client-disable ; bash'}
-          #[exec] (容器WEB服务启动) {xterm -e sh -c 'hexo-server-enable ; bash'}
-          #[exec] (容器WEB服务关闭) {xterm -e sh -c 'hexo-server-disable ; bash'}
-      [end]
-      [exec] (VPN-status) {xterm -e sh -c 'systemctl status zerotier-one.service ; bash'}
-      [exec] (VPN-enable) {xterm -e sh -c 'zerotier-enable ; bash'}
-      [exec] (VPN-disable) {xterm -e sh -c 'zerotier-disable ; bash'}
-      #[exec] (代理状态) {xterm -e sh -c 'systemctl status clash-pro.service ; bash'}
-      #[exec] (代理启动) {xterm -e sh -c 'clash-pro-enable ; bash'}
-      #[exec] (代理关闭) {xterm -e sh -c 'clash-pro-disable ; bash'}
-      #[exec] (AI框架启动) {xterm -e sh -c 'ollama-enable ; bash'}
-      #[exec] (AI框架关闭) {xterm -e sh -c 'ollama-disable ; bash'}
+      # You can write your script startup in here
+      #[exec] (script) {xterm -e sh -c 'script-start ; bash'}
 [end]
