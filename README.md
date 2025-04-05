@@ -24,10 +24,12 @@
   | OS Standards | Arch Linux | x86_64/ARM |
   | :------ | :------ | :------ |
   | Linux Kernel | 6.13.8 | linux-zen |
-  | Shell | zsh/bash | xterm |
-  | Displays | 21.1.16 | X11 |
   | Window Lander | 0.5.3 | lxdm |
   | Window Manager | 1.3.7 | Fluxbox |
+  | Displays | 21.1.16 | X11 |
+  | Shell | zsh/bash | xterm |
+  | Files | 1.9.4/24.12.3 | ranger/dolphin |
+  | Text | \ | nano/vim/code |
   | Input | 5.1.12 | fcitx5 |
   | Sound | 1.2.13 | alsa-lib |
   | Bluetooth | 5.82 | bluez |
