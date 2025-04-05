@@ -10,5 +10,5 @@
   ██████╔╝██║  ██║██║  ██║██║  ██╗██║  ██║██║  ██║╚██████╗██║  ██║╚███╔███╔╝██║ ╚═╝ ██║
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝
   ```
-### <p align="center"> View multilingual documentation:
-[English](./language/English.md) | [中文](./language/Chinese.md)</p>
+### <p align="center"> View multilingual documentation: </p>
+#### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
