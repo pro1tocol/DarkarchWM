@@ -15,6 +15,9 @@
 ### <p align="center"> View multilingual documentation: </p>
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
-| type | type | type |
-| :------: | :------: | :------: |
-| type | type | type |
+<center>
+  | type | type | type |
+  | :------: | :------: | :------: |
+  | type | type | type |
+</center>
+
