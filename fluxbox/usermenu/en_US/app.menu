@@ -1,0 +1,62 @@
+[submenu] (Application)
+#     [exec] (终端) {xterm}
+      # 安装工具：wechat wechat-sandbox-provider ttf-twemoji orca
+      [exec] (Wechat) {wechat.sh}
+#	  [exec] (钉钉) {dingtalk}
+#	  [exec] (游戏) {steam}
+      [exec] (Firefox) {firefox}
+      [exec] (Dolphin) {dolphin}
+      [exec] (Code) {code}
+      #[exec] (媒体库) {jellyfinmediaplayer}
+	  #[exec] (远程桌面) {vmware-view}
+	  [exec] (Putty) {putty}
+[end]
+[submenu] (Tools)
+	  [exec] (Date) {xterm -e sh -c 'cal -y && echo 'Today：' && date ; bash'}
+      [exec] (Calculator) {gnome-calculator}
+      [exec] (Cloudmusic) {netease-cloud-music}
+      [exec] (Obs) {obs}
+      [exec] (Screenshot) {gnome-screenshot}
+      [exec] (Gwenview) {gwenview}
+[end]
+# 安装工具：wps-office-cn wps-office-mui-zh-cn wps-office-fonts ttf-wps-fonts
+# 文档wps 电子表格et 演示文稿wpp
+#[submenu] (文本工具)
+#      [exec] (Doc文档) {wps}
+#      [exec] (Excl表格) {et}
+#      [exec] (PPT演示) {wpp}
+#      [exec] (PDF查看器) {wpspdf}
+#[end]
+[submenu] (Shell)
+	  [exec] (Bettery) {xterm -e sh -c 'watch -n 1 -c "acpi"'}
+      [exec] (Monitor) {xterm -e sh -c 'watch -n 1 -c "sensors | grep Core && sensors | grep Composite && free -h && echo '+----' && df -h"'}
+      [exec] (Bashtop) {xterm -e sh -c 'bashtop'}
+      [exec] (Iftop) {xterm -e sudo sh -c 'iftop -h ; bash'}
+      [exec] (Transport) {xterm -e sh -c 'transport-monitor; bash'}
+      [exec] (Wireshark) {xterm -e sudo sh -c 'wireshark'}
+      [exec] (Wifite) {xterm -e sh -c 'wifite -h ; bash'}
+[end]
+# 兼容工具使用：dolphin systemsettings kscreen powerdevil breeze-gtk breeze-plymouth plasma-pa plasma-nm
+# 输入法工具使用：fcitx5 fcitx5-chinese-addons fcitx5-configtool
+[submenu] (System)
+	  [submenu] (Light)
+          [exec] (5%) {xterm -e sudo sh -c 'echo 12 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (10%) {xterm -e sudo sh -c 'echo 25 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (15%) {xterm -e sudo sh -c 'echo 38 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (25%) {xterm -e sudo sh -c 'echo 64 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (35%) {xterm -e sudo sh -c 'echo 90 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (50%) {xterm -e sudo sh -c 'echo 128 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (75%) {xterm -e sudo sh -c 'echo 192 > /sys/class/backlight/amdgpu_bl1/brightness'}
+          [exec] (100%) {xterm -e sudo sh -c 'echo 255 > /sys/class/backlight/amdgpu_bl1/brightness'}
+      [end]
+      [exec] (Bluez) {xterm -e sh -c 'bluetoothctl'}
+#      [exec] (声音调节) {xterm -e sh -c 'alsamixer'}
+      [exec] (Nmtui) {xterm -e sh -c 'nmtui'}
+#	   [exec] (GPU-s) {gpu-settings}
+      [exec] (GPU-view) {gpu-viewer}
+[end]
+	  [exec] (Settings) {plasma-open-settings}
+[separator]
+
+
+
