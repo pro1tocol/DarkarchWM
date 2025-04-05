@@ -16,9 +16,9 @@
 
 ## Build the Environment
 
-  | OS Standards | ArchLinux | X86/x86_64/ARM |
+  | OS | Arch Linux | X86/x86_64/ARM |
   | :------ | :------ | :------ |
-  | Linux Kernel | 6.13.8 | zen |
+  | Linux Kernel | 6.13.8 | linux-zen |
   | Shell | zsh/bash | xterm |
   | Displays | 21.1.16 | X11 |
   | Window Lander | 0.5.3 | lxdm |
