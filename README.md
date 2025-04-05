@@ -14,10 +14,10 @@
 ### <p align="center"> View multilingual documentation: </p>
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
-## System environment
+## Installation
 
-  | type | type | type |
   | :------: | :------: | :------: |
+  | OS standards | ArchLinux | X86/x86_64/ARM |
   | type | type | type |
 
 
