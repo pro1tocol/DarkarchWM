@@ -1,3 +1,5 @@
+# DarkarchWM
+##### This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/)
 ``` bash
 ██████╗  █████╗ ██████╗ ██╗  ██╗ █████╗ ██████╗  ██████╗██╗  ██╗██╗    ██╗███╗   ███╗
 ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║██║    ██║████╗ ████║
@@ -6,6 +8,3 @@
 ██████╔╝██║  ██║██║  ██║██║  ██╗██║  ██║██║  ██║╚██████╗██║  ██║╚███╔███╔╝██║ ╚═╝ ██║
 ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝
 ```
-# DarkarchWM
-##### This Repositorie is deeply customizable based on the [blackarch](https://blackarch.org/)
-
