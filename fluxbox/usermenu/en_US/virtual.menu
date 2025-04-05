@@ -1,10 +1,4 @@
 [submenu] (Virtual)
-      [submenu] (Control)
-          [exec] (VMWare-status) {xterm -e sh -c 'systemctl status vmware-usbarbitrator.service && systemctl status vmware-networks.service ; bash'}
-          [exec] (VMWare-enable) {xterm -e sh -c 'vmware-enable ; bash'}
-          [exec] (VMWare-disable) {xterm -e sh -c 'vmware-disable ; bash'}
-      [end]
-      [exec] (VMware-Workstation) {vmware}
-      [exec] (VMware-Netcfg) {xterm -e sh -c 'vmware-netcfg'}
-#      [exec] (视窗模拟器) {/opt/apps/net.winegame.client/files/bin/winegame}
+       # You can write your docker startup method
+       #[exec] (docker) {}
 [end]
