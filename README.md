@@ -28,6 +28,9 @@
   | Displays | 21.1.16 | X11 |
   | Window Lander | 0.5.3 | lxdm |
   | Window Manager | 1.3.7 | Fluxbox |
+  | Input | 5.1.12 | fcitx5 |
+  | Sound | 1.2.13 | alsa-lib |
+  | Bluetooth | 5.82 | bluez |
 
 ## See the Theme
 
