@@ -1,8 +1,10 @@
-# '10-monitor.conf'
-## keep the screnn on 
+# Configuration explained
+> ### '10-monitor.conf'
+#### keep the screnn on 
 
-# '40-libinput.conf'
-## the screen is statically rotated
+> ### '40-libinput.conf'
+#### the screen is statically rotated
+
 ### and you need add configuration
 ``` bash
 echo "xrandr -o 3" >> /home/$USER/.xprofile
