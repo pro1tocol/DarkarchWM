@@ -16,8 +16,9 @@
 
 ## Installation
 
-  | :------: | :------: | :------: |
   | OS standards | ArchLinux | X86/x86_64/ARM |
+  | :------: | :------: | :------: |
+  | type | type | type |
   | type | type | type |
 
 
