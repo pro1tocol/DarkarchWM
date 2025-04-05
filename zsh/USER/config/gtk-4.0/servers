@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="smb://10.0.0.21/%E4%B8%B4%E6%97%B6%E5%AD%98%E5%82%A8/" added="2024-12-29T18:50:11.498267Z" modified="2024-12-29T18:50:11.498282Z" visited="2024-12-29T18:50:11.498275Z">
+    <title>10.0.0.21 上的 临时存储</title>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <bookmark:applications>
+          <bookmark:application name="org.gnome.Nautilus" exec="&apos;org.gnome.Nautilus %u&apos;" modified="2024-12-29T18:50:11.498277Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

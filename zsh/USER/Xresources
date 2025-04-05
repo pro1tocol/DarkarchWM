@@ -1,0 +1,13 @@
+XTerm*faceName: SFMono Nerd Font Mono
+XTerm*faceNameDoublesize: Microsoft YaHei 
+xterm*faceSize: 22
+xterm*vt100*geometry: 90x25
+xterm*saveLines: 16384
+xterm*termName: xterm-color
+xterm*eightBitInput: false
+xterm*background: black
+xterm*foreground: #EAEAEF
+xterm*VT100.Translations: #override \
+    Alt <Key> minus: smaller-vt-font() \n\
+    Alt <Key> plus: larger-vt-font() \n\
+    Alt <Key> 0: set-vt-font(d)
