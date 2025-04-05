@@ -15,7 +15,7 @@
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
 ## Instructions
-- ##### This window manager theme was not built with blackarch full-iso
+- ##### This theme can be built in archlinux
 - ##### The operating environment is extremely lightweight
 
 
