@@ -10,4 +10,4 @@
   ██████╔╝██║  ██║██║  ██║██║  ██╗██║  ██║██║  ██║╚██████╗██║  ██║╚███╔███╔╝██║ ╚═╝ ██║
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝
   ```
-### <p align="center"> Multilingual documentation：[title](./language/English.md#1) </p>
+### <p align="center"> View multilingual documentation：[English](./language/English.md) | [中文](./language/Chinese.md)</p>
