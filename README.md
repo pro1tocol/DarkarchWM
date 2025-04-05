@@ -27,7 +27,6 @@
 ## See the Theme
 
 ![image](./png/firefox.png)
-![image](./png/file.png)
   
 
 
