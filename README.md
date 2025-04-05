@@ -10,4 +10,4 @@
   ██████╔╝██║  ██║██║  ██║██║  ██╗██║  ██║██║  ██║╚██████╗██║  ██║╚███╔███╔╝██║ ╚═╝ ██║
   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝
   ```
-## <center> Multilingual documentation：[title](./language/English.md#1) </center>
+### <p align="center"> Multilingual documentation：[title](./language/English.md#1) </p>
