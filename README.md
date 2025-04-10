@@ -11,7 +11,7 @@
 
 ##### <p align="center"> This Repositorie is deeply customizable theme based on the [blackarch](https://blackarch.org/) </p>
 
-### <p align="center"> Installation documentation: </p>
+### <p align="center"> Installation: </p>
 #### <p align="center"> [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
 ## Instructions
