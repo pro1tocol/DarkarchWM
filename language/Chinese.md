@@ -4,7 +4,7 @@
 - [x] 必备
 - [ ] 选配
 
-| 源路径 | 目标路径 | 配置说明 | 注 |
+| 源路径 | 目标路径 | 配置说明 | 注释 |
 | :--- | :--- | :--- | :--- |
 | ./etc/lxdm/lxdm.conf | /etc/lxdm/lxdm.conf | 登陆器访问配置文件 | &#9745; | 
 | ./etc/pam.d/lxdm | /etc/pam.d/lxdm | 登录器访问用户权限设置| &#9745; |
@@ -13,7 +13,7 @@
 | ./etc/profile | /etc/profile | 对sbin/脚本目录支持的path | &#9745; |
 | ./fcitx5/dark/ | ~/.local/share/fcitx5/themes/dark/ | 对Fcitx5输入法暗色主题的支持 | ⬜️ |
 | ./fluxbox/backgrounds/ | ~/.fluxbox/backgrounds/ | 对Darkarch主题壁纸的支持 | &#9745; |
-| ./fluxbox/usermenu/ | ~/.fluxbox/usermenu/ | 对Darkarch用户分类自定义菜单的支持 | ⬜️ |
+| ./fluxbox/usermenu/ | ~/.fluxbox/usermenu/ | 对分类自定义菜单的支持 | ⬜️ |
 | ./fluxbox/init_zh_CN | ~/.fluxbox/init | 对Darkarch默认配置的支持 | &#9745; |
 | ./fluxbox/keys | ~/.fluxbox/keys | 对Darkarch快捷键位的支持 | &#9745; |
 | ./fluxbox/lastwallpaper | ~/.fluxbox/lastwallpaper | 使Darkarch默认壁纸配置生效 | &#9745; |
