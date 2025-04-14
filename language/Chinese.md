@@ -16,6 +16,6 @@
 | ./fluxbox/usermenu/ | /home/$USER/.fluxbox/usermenu/ | 增加对Darkarch用户分类自定义菜单的支持 | <ul><li>- [ ]</li></ul> |
 | ./fluxbox/init_zh_CN | /home/$USER/.fluxbox/init | 增加Darkarch默认配置的支持 | <ul><li>- [x]</li></ul> |
 | ./fluxbox/keys | /home/$USER/.fluxbox/keys | 增加对Darkarch快捷键位的支持 | <ul><li>- [x]</li></ul> |
-| ./fluxbox/lastwallpaper | /home/$USER/.fluxbox/lastwallpaper | 使Darkarch默认壁纸配置生效 | <li>[x]</li> |
-| ./fluxbox/menu_zh_CN | /home/$USER/.fluxbox/menu | 增加对Darkarch默认初始菜单的支持 | <ul>[x]</ul> |
+| ./fluxbox/lastwallpaper | /home/$USER/.fluxbox/lastwallpaper | 使Darkarch默认壁纸配置生效 | &#9745; |
+| ./fluxbox/menu_zh_CN | /home/$USER/.fluxbox/menu | 增加对Darkarch默认初始菜单的支持 | &#9744; |
 
