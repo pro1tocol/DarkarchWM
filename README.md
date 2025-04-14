@@ -37,6 +37,3 @@
 ## See
 
 ![image](./png/firefox.png)
-  
-
-
