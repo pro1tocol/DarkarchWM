@@ -1,4 +1,4 @@
-# Introduction
+# Installation
 
 ### Description: Overwrite a file or directory
 - [x] Necessary
