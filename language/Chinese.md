@@ -19,8 +19,7 @@
 | ./fluxbox/lastwallpaper | ~/.fluxbox/lastwallpaper | 使Darkarch默认壁纸配置生效 | &#9745; |
 | ./fluxbox/menu_zh_CN | ~/.fluxbox/menu | 对Darkarch默认初始菜单的支持 | ⬜️ |
 | ./usr/share/fluxbox/styles/darkarch/ | /usr/share/fluxbox/styles/darkarch/ | 对Darkarch默认主题的支持 | &#9745; |
-| ./usr/share/fonts/Windows-to-Linux-Fonts/ | /usr/share/fonts/Windows-to-Linux-Fonts/ | 对Darkarch默认中文字体的支持 | &#9745; |
+| ./usr/share/fonts/* | /usr/share/fonts/* | 对Darkarch默认中文字体的支持 | &#9745; |
 | ./usr/share/lxdm/themes/BlackArch/ | /usr/share/lxdm/themes/BlackArch/ | 对Darkarch默认登陆器主题的支持 | &#9745; |
-| ./usr/share/X11/xorg.conf.d/10-monitor.conf | /usr/share/X11/xorg.conf.d/10-monitor.conf | 对屏幕常亮的支持 | ⬜️ | 
-| ./usr/share/X11/xorg.conf.d/40-libinput.conf | /usr/share/X11/xorg.conf.d/40-libinput.conf | 对触摸屏的支持 | ⬜️ | 
+| ./usr/share/X11/xorg.conf.d/* | /usr/share/X11/xorg.conf.d/* | 对屏幕的相关支持 | ⬜️ | 
 
