@@ -7,7 +7,7 @@
 | 源路径 | 目标路径 | 配置说明 | 注 |
 | :--- | :--- | :--- | :--- |
 | ./etc/lxdm/lxdm.conf | /etc/lxdm/lxdm.conf | 登陆器访问配置文件 | &#9745; | 
-| ./etc/pam.d/lxdm | /etc/pam.d/lxdm | 登录器访问用户权限设置| &#9745; |
+| ./etc/pam.d/lxdm | /etc/pam.d/lxdm | 登录器访问用户权限设置| ✅ |
 | ./etc/systemd/logind.conf | /etc/systemd/logind.conf | 对笔记本电脑禁用盒盖熄屏设置 | ⬜️ |
 | ./etc/environment_zh_CN | /etc/environment | 对fcitx输入法支持的环境变量 | &#9745; |
 | ./etc/profile | /etc/profile | 对sbin/脚本目录支持的path | &#9745; |
