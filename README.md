@@ -28,7 +28,7 @@
   | Displays | 21.1.16 | X11 |
   | Shell | zsh/bash | xterm |
   | Files | 1.9.4/24.12.3 | ranger/dolphin |
-  | Text | - | nano/vim/code |
+  | Text | - | vim/nano/code |
   | Input | 5.1.12 | fcitx5 |
   | Sound | 1.2.13 | alsa-lib |
   | Bluetooth | 5.82 | bluez |
