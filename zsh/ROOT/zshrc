@@ -18,7 +18,7 @@ esac
 autoload -U colors && colors
 
 NEWLINE=$'\n'
-PS1=" %{$fg[yellow]%}%Bhostname %{$fg[cyan]%}[%M] %{$fg[yellow]%}user %{$fg[red]%}💀 [%n] %{$fg[yellow]%}path %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*)-> %{$reset_color%}%b"
+PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*) %{$reset_color%}%b"
 
 autoload -U compinit
 compinit
@@ -39,6 +39,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100
 SAVEHIST=50
 setopt appendhistory
+set -o vi
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
