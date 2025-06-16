@@ -39,7 +39,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100
 SAVEHIST=50
 setopt appendhistory
-set -o vi
+#set -o vi
 bindkey -v
 autoload -U select-quoted
 zle -N select-quoted
