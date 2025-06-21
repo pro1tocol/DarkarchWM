@@ -1,5 +1,3 @@
-session.screen0.toolbar.button.touchpad.label:	    TouchPad
-session.screen0.toolbar.button.touchpad.commands:	exec $HOME/.fluxbox/sh/touchpad.sh
 session.screen0.toolbar.button.menu.label:	    MENU  
 session.screen0.toolbar.button.menu.commands:	RootMenu
 session.screen0.toolbar.button.update.label:	   RESTART  
@@ -10,7 +8,7 @@ session.screen0.toolbar.alpha:	255
 session.screen0.toolbar.visible:	true
 session.screen0.toolbar.autoHide:	false
 session.screen0.toolbar.maxOver:	false
-session.screen0.toolbar.tools:	button.touchpad, clock, systemtray, iconbar, prevworkspace, workspacename, nextworkspace, button.update, button.menu, button.exit
+session.screen0.toolbar.tools:	clock, systemtray, iconbar, prevworkspace, workspacename, nextworkspace, button.update, button.menu, button.exit
 session.screen0.toolbar.height:	0
 session.screen0.toolbar.widthPercent:	100
 session.screen0.toolbar.onhead:	1
