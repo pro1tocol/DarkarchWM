@@ -2,5 +2,4 @@ bindsym --release $mod+s exec --no-startup-id plasma-open-settings
 bindsym --release $mod+d exec --no-startup-id dolphin
 bindsym --release $mod+f exec --no-startup-id firefox
 bindsym --release $mod+c exec --no-startup-id code
-bindsym --release $mod+w exec --no-startup-id wechat.sh
 bindsym --release $mod+t exec --no-startup-id putty
