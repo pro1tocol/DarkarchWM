@@ -38,17 +38,17 @@ interval=60
 max_width=500
 min_width=500
 
-# User status
-[user]
-label=
-command=echo " $(w | awk '/load average:/ {print $4,$5}' | grep -Eo '[1-9]')"
-color=#00FFFF
-interval=3
-
 # Temperature status
 [temperature]
 label=
 command=echo " $(awk '{print $1 / 1000}' /sys/class/thermal/thermal_zone*/temp | head -n 1)°C"
+color=#00FFFF
+interval=3
+
+# User status
+[user]
+label=
+command=echo " $(w | awk '/load average:/ {print $4,$5}' | grep -Eo '[1-9]')"
 color=#00FFFF
 interval=3
 
