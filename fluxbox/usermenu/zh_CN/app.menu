@@ -25,19 +25,20 @@
       [exec] (抓包工具) {xterm -e sudo sh -c 'wireshark'}
 [end]
 [submenu] (系统设置)
-	  [submenu] (亮度调节)
-          [exec] (5%) {xterm -e sudo sh -c 'echo 12 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (10%) {xterm -e sudo sh -c 'echo 25 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (15%) {xterm -e sudo sh -c 'echo 38 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (25%) {xterm -e sudo sh -c 'echo 64 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (35%) {xterm -e sudo sh -c 'echo 90 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (50%) {xterm -e sudo sh -c 'echo 128 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (75%) {xterm -e sudo sh -c 'echo 192 > /sys/class/backlight/intel_backlight/brightness'}
-          [exec] (100%) {xterm -e sudo sh -c 'echo 255 > /sys/class/backlight/intel_backlight/brightness'}
-      [end]
+	  #[submenu] (亮度调节)
+          #[exec] (5%) {xterm -e sudo sh -c 'echo 12 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (10%) {xterm -e sudo sh -c 'echo 25 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (15%) {xterm -e sudo sh -c 'echo 38 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (25%) {xterm -e sudo sh -c 'echo 64 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (35%) {xterm -e sudo sh -c 'echo 90 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (50%) {xterm -e sudo sh -c 'echo 128 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (75%) {xterm -e sudo sh -c 'echo 192 > /sys/class/backlight/intel_backlight/brightness'}
+          #[exec] (100%) {xterm -e sudo sh -c 'echo 255 > /sys/class/backlight/intel_backlight/brightness'}
+      #[end]
       [exec] (蓝牙设置) {xterm -e sh -c 'bluetoothctl'}
       [exec] (声音调节) {xterm -e sh -c 'alsamixer'}
       [exec] (网络设置) {xterm -e sh -c 'nmtui'}
+      [exec] (透明设置) {picom-conf}
       [exec] (显卡监控) {gpu-viewer}
 [end]
       [exec] (功能设置) {plasma-open-settings}
