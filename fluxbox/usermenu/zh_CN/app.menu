@@ -7,6 +7,7 @@
 [submenu] (兼容工具)
       [exec] (日历) {xterm -e sh -c 'cal -y && echo '今天是：' && date ; bash'}
       [exec] (计算器) {gnome-calculator}
+      [exec] (屏幕按键) {screenkey -p fixed -g 10%x8%+88%-2%}
       [exec] (全屏截图) {gnome-screenshot}
       [exec] (图片查看器) {gwenview}
 [end]
