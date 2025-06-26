@@ -76,6 +76,7 @@ Mod1 f :Exec firefox
 Mod1 d :Exec dolphin
 Mod1 c :Exec code
 Mod1 s :Exec plasma-open-settings
+Mod1 p :Exec screenkey -p fixed -g 10%x8%+88%-2%
 
 # volume settings, using common keycodes
 # if these don't work, use xev to find out your real keycodes
