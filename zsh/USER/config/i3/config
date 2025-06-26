@@ -19,7 +19,7 @@ for_window [class="^.*"] border pixel 1
 #the touchpad from /usr/share/X11/xorg.conf.d/70-synaptics.conf support
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
-exec --no-startup-id screenkey -p fixed -g 10%x8%+88%-2%
+exec --no-startup-id screenkey -p fixed -g 15%x8%+80%-2%
 
 # Setup Sound
 set $refresh_i3status killall -SIGUSR1 i3status

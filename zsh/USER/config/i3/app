@@ -3,3 +3,4 @@ bindsym --release $mod+d exec --no-startup-id dolphin
 bindsym --release $mod+f exec --no-startup-id firefox
 bindsym --release $mod+c exec --no-startup-id code
 bindsym --release $mod+t exec --no-startup-id putty
+bindsym --release $mod+p exec --no-startup-id screenkey -p fixed -g 15%x8%+80%-2%
