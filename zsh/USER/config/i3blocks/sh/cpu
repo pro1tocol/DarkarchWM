@@ -1,0 +1,6 @@
+#!/bin/sh
+TEMP=$(sensors | grep 'k10temp-pci-00c3:\|Tctl' | grep ':[ ]*+[0-9]*.[0-9]*°C' -o | grep '+[0-9]*.[0-9]*°C' -o | awk -F"+" {'print $2'})
+LOAD=$(cat /proc/loadavg | awk '{print $1}')
+CPU_USAGE=$(mpstat 1 1 | awk '/Average:/ {printf("%s%\n", $(NF-9))}')
+MEMORY=$(free | grep Mem: | awk '{printf "%.0f%\n", $3/$2 * 100}')
+echo "$TEMP $LOAD $CPU_USAGE $MEMORY" | awk '{printf(" %s  %s  %s  %s\n "), $1, $2, $3, $4}'

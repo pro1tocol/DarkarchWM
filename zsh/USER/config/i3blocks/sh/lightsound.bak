@@ -1,0 +1,4 @@
+#!/bin/sh
+LIGHTMG=$(brightnessctl | awk '/Current brightness:/ {print $4}' | awk -F"(" {'print $2'} | awk -F")" {'print $1'})
+SOUNDMG=$(pactl get-sink-volume alsa_output.pci-0000_05_00.6.analog-stereo | awk '/Volume:/ {print $5}')
+echo "$SOUNDMG $LIGHTMG" | awk '{printf(" %s 󰛨 %s "), $1, $2}'
