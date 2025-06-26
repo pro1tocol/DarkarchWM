@@ -15,7 +15,6 @@ xmodmap "/home/C4ry/.Xmodmap"
 # wmsmixer -w &
 # idesk &
 $HOME/.fluxbox/sh/touchpad.sh &
-screenkey -p fixed -g 10%x8%+88%-2% &
 picom &
 # And last but not least we start fluxbox.
 # Because it is the last app you have to run it with ''exec'' before it.
