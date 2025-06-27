@@ -48,7 +48,8 @@
 ##### Example
 ``` bash
 #Win + Shift + 2 : move window to workspace 2
-#Win + j : resize window to big
+#Alt + l : move window to right
+#Win + l : resize window to bigger
 ```
 
 #### The "Alt" Keys
