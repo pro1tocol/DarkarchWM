@@ -33,9 +33,6 @@
 - ##### Brightness adjustment
 - ##### Volume adjustment
 - ##### Touchpad
-- ##### Battery monitor
-- ##### Internet protocol monitor
-- ##### load monitor
 - ##### Window indicator
 - ##### Program Launcher
 
