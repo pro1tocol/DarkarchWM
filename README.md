@@ -46,6 +46,11 @@
 - ##### `j` : down
 - ##### `k` : up
 - ##### `l` : right
+##### Example
+``` bash
+#Alt + Shift + h : move window to left
+#Win + Shift + 2 : move window to workspace 2
+```
 
 #### The "Alt" Keys
 - ##### `Alt + F1` :open terminal
@@ -56,7 +61,7 @@
 - ##### `Alt + s` :open gsettings
 - ##### `Alt + Shift + r` :restart window manager
 - ##### `Alt + Shift + q` :exit window manager
-- ##### `Alt + mouse_left` :Move window
+- ##### `Alt + mouse_left` :move window
 - ##### `Alt + mouse_right` :resize window
 
 #### The "WIn/Option" Keys
