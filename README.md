@@ -27,4 +27,4 @@
 
 ## See
 
-![image](./png/i3-desktop_see.png)
+![image](./png/i3-desktop_see.jpg)
