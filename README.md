@@ -1,15 +1,6 @@
-  ```ruby
-  ██████╗  █████╗ ██████╗ ██╗  ██╗ █████╗ ██████╗  ██████╗██╗  ██╗██╗    ██╗███╗   ███╗
-  ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██║  ██║██║    ██║████╗ ████║
-  ██║  ██║███████║██████╔╝█████╔╝ ███████║██████╔╝██║     ███████║██║ █╗ ██║██╔████╔██║
-  ██║  ██║██╔══██║██╔══██╗██╔═██╗ ██╔══██║██╔══██╗██║     ██╔══██║██║███╗██║██║╚██╔╝██║
-  ██████╔╝██║  ██║██║  ██║██║  ██╗██║  ██║██║  ██║╚██████╗██║  ██║╚███╔███╔╝██║ ╚═╝ ██║
-  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝     ╚═╝.theme
-  ```
+![image](./png/DarkarchWM.png)
 
-# <p align="center"> DarkarchWM </p>
-
-##### <p align="center"> for i3 window manager </p>
+# <p align="center"> For i3 window manager </p>
 
 ### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
@@ -17,22 +8,22 @@
 - ##### This theme can be built in archlinux
 - ##### The operating environment is extremely lightweight
 
-
 ## Build the Environment
 
-  | OS Standards | Arch Linux | x86_64/ARM |
-  | :------ | :------ | :------ |
-  | Linux Kernel | 6.13.8 | linux-zen |
-  | Window Lander | 0.5.3 | lxdm |
-  | Window Manager | 1.3.7 | i3wm |
-  | Displays | 21.1.16 | X11 |
-  | Shell | zsh/bash | xterm |
-  | Files | 1.9.4/24.12.3 | ranger/dolphin |
-  | Text | - | vim/nano/code |
-  | Input | 5.1.12 | fcitx5 |
-  | Sound | 1.2.13 | alsa-lib |
-  | Light | o.5 | brightnessctl |
-  | Bluetooth | 5.82 | bluez |
+  | Standards |  x86_64/ARM | Dependence |
+  | :------ | :------ | :------- |
+  | Kernel | linux-zen | systemd/lvm |
+  | Lander | lxdm | gtk3/breeze-dark |
+  | Manager | i3/i3blocks | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct |
+  | Displays | X11 | picom/rofi/xf86-input-amdgpu |
+  | Shell |  xterm | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions/zsh-history-substring-search |
+  | Files | ranger/dolphin | devicons/gtk6ct/breeze-dark |
+  | Fonts | Microsoft/SFMonoNerd | others |
+  | Text | vim/nano/code | vim-molokai |
+  | Input | fcitx5 | simple-dark/libxxf86vm/lib32-libxxf86vm/xf86-input-synaptics/xf86-input-libinput |
+  | Sound | alsa-lib | xf86-input-void/pactl |
+  | Bluetooth | bluez | bluetoothctl |
+  | Light | brightnessctl | xf86-input-evdev |
 
 ## See
 
