@@ -10,21 +10,34 @@
 
 ## Build the Environment
 
-  | Standards |  x86_64/ARM | Dependence |
-  | :------ | :------ | :------- |
-  | Kernel | linux-zen | systemd/lvm |
-  | Lander | lxdm | gtk3/breeze-dark |
-  | Manager | i3/i3blocks | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct |
-  | Displays | X11 | picom/rofi/xf86-input-amdgpu |
-  | Shell |  xterm | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions/zsh-history-substring-search |
-  | Files | ranger/dolphin | devicons/gtk6ct/breeze-dark |
-  | Fonts | Microsoft/SFMonoNerd | others |
-  | Text | vim/nano/code | vim-molokai |
-  | Input | fcitx5 | simple-dark/libxxf86vm/lib32-libxxf86vm/xf86-input-synaptics/xf86-input-libinput |
-  | Sound | alsa-lib | xf86-input-void/pactl |
-  | Bluetooth | bluez | bluetoothctl |
-  | Light | brightnessctl | xf86-input-evdev |
+  | Standards | x86_64/ARM           | Dependence                                                                                        |
+  | :-------- | :------------------- | :------------------------------------------------------------------------------------------------ |
+  | Kernel    | linux-zen            | systemd/lvm                                                                                       |
+  | Lander    | lxdm                 | gtk3/breeze-dark                                                                                  |
+  | Manager   | i3/i3blocks          | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
+  | Displays  | X11                  | picom/rofi/xf86-input-amdgpu                                                                      |
+  | Shell     | xterm                | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions/zsh-history-substring-search |
+  | Files     | ranger/dolphin       | devicons/gtk6ct/breeze-dark                                                                       |
+  | Fonts     | Microsoft/SFMonoNerd | others                                                                                            |
+  | Text      | vim/nano/code        | vim-molokai                                                                                       |
+  | Input     | fcitx5               | simple-dark/libxxf86vm/lib32-libxxf86vm/xf86-input-synaptics/xf86-input-libinput                  |
+  | Sound     | alsa-lib             | xf86-input-void/pactl                                                                             |
+  | Bluetooth | bluez                | bluetoothctl                                                                                      |
+  | Light     | brightnessctl        | xf86-input-evdev                                                                                  |
 
 ## See
 
 ![image](./png/i3-desktop_see.jpg)
+
+## Support
+- ##### Brightness adjustment
+- ##### Volume adjustment
+- ##### Touchpad
+- ##### Battery monitor
+- ##### Internet protocol monitor
+- ##### load monitor
+- ##### Window indicator
+- ##### Program Launcher
+
+## Shortcut keys
+- ##### `Alt + F1` :open terminal
