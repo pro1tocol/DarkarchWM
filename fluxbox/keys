@@ -126,9 +126,9 @@ Mod4 3 :Workspace 3
 #Control 1 :SendToWorkspace 1
 #Control 2 :SendToWorkspace 2
 #Control 3 :SendToWorkspace 3
-Mod4 Shift 1 :SendToWorkspace1
-Mod4 Shift 2 :SendToWorkspace2
-Mod4 Shift 3 :SendToWorkspace3
+Mod4 Shift 1 :SendToWorkspace 1
+Mod4 Shift 2 :SendToWorkspace 2
+Mod4 Shift 3 :SendToWorkspace 3
 
 # send the current window and change to a specific workspace
 #Control Mod4 F1 :TakeToWorkspace 1
