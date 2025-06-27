@@ -1,7 +1,5 @@
 ![image](./png/DarkarchWM.png)
 
-# <p align="center"> DarkarchWM </p>
-
 ##### <p align="center"> This Repositorie is deeply customizable theme based on the [blackarch](https://blackarch.org/) </p>
 
 ### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
@@ -12,11 +10,11 @@
 
 ## Build the Environment
 
-  | OS Standards |  x86_64/ARM | Dependence |
+  | Standards |  x86_64/ARM | Dependence |
   | :------ | :------ | :------- |
-  | Linux Kernel | linux-zen | systemd/lvm |
-  | Window Lander | lxdm | gtk3/breeze-dark |
-  | Window Manager | Fluxbox | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct |
+  | Kernel | linux-zen | systemd/lvm |
+  | Lander | lxdm | gtk3/breeze-dark |
+  | Manager | Fluxbox | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct |
   | Displays | X11 | picom/rofi/xf86-input-amdgpu |
   | Shell |  xterm | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions/zsh-history-substring-search |
   | Files | ranger/dolphin | devicons/gtk6ct/breeze-dark |
