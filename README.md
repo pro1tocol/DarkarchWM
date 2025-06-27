@@ -42,10 +42,12 @@
 ## Shortcut keys
 
 #### The "Move" keys
-- ##### `h` : left
-- ##### `j` : down
-- ##### `k` : up
-- ##### `l` : right
+``` bash
+# h : left
+# j : down
+# k : up
+# l : right
+```
 ##### Example
 ``` bash
 #Alt + Shift + h : move window to left
@@ -53,23 +55,27 @@
 ```
 
 #### The "Alt" Keys
-- ##### `Alt + F1` :open terminal
-- ##### `Alt + p` :open screenkey
-- ##### `Alt + c` :open vscode
-- ##### `Alt + f` :open firefox
-- ##### `Alt + r` :resize window
-- ##### `Alt + s` :open gsettings
-- ##### `Alt + Shift + r` :restart window manager
-- ##### `Alt + Shift + q` :exit window manager
-- ##### `Alt + mouse_left` :move window
-- ##### `Alt + mouse_right` :resize window
+``` bash
+# Alt + F1 :open terminal
+# Alt + p :open screenkey
+# Alt + c :open vscode
+# Alt + f :open firefox
+# Alt + r :resize window
+# Alt + s :open gsettings
+# Alt + Shift + r :restart window manager
+# Alt + Shift + q :exit window manager
+# Alt + mouse_left :move window
+# Alt + mouse_right :resize window
+```
 
 #### The "WIn/Option" Keys
-- ##### `Win + r` : run command
-- ##### `Win + d` : run desktop application
-- ##### `Win + 1` : to workspace 1
-- ##### `Win + 2` : to workspace 2
-- ##### `Win + 3` : to workspace 3
-- ##### `Win + Shift + 1` : take window to workspace 1
-- ##### `Win + Shift + 2` : take window to workspace 2
-- ##### `Win + Shift + 3` : take window to workspace 3
+``` bash
+# Win + r : run command
+# Win + d : run desktop application
+# Win + 1 : to workspace 1
+# Win + 2 : to workspace 2
+# Win + 3 : to workspace 3
+# Win + Shift + 1 : take window to workspace 1
+# Win + Shift + 2 : take window to workspace 2
+# Win + Shift + 3 : take window to workspace 3
+```
