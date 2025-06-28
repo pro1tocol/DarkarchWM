@@ -1,8 +1,4 @@
-<p align="center"> 
-
 ![image](./png/DarkarchWM.png)
-
-</p>
 
 # <p align="center"> For i3 window manager </p>
 
