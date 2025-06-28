@@ -1,4 +1,0 @@
-[submenu] (Virtual)
-       # You can write your docker startup method
-       #[exec] (docker) {}
-[end]

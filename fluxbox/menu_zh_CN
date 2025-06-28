@@ -17,8 +17,6 @@
 [begin] (核心控制)
 [encoding] {UTF-8}
 [include] (~/.fluxbox/usermenu/app.menu)
-[include] (~/.fluxbox/usermenu/virtual.menu)
-[include] (~/.fluxbox/usermenu/script.menu)
 [submenu] (默认设置)
       [reconfig] (重载配置)
 	  [restart] (刷新配置)

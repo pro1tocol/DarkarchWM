@@ -1,4 +1,0 @@
-[submenu] (脚本集合)
-      # 你可以将你的自制脚本启动方式设置在此处
-      #[exec] (脚本) {xterm -e sh -c 'script-start ; bash'}
-[end]

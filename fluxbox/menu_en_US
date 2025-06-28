@@ -17,8 +17,6 @@
 [begin] (Core)
 [encoding] {UTF-8}
 [include] (~/.fluxbox/usermenu/app.menu)
-[include] (~/.fluxbox/usermenu/virtual.menu)
-[include] (~/.fluxbox/usermenu/script.menu)
 [submenu] (Default)
       [reconfig] (Reconfig)
 	  [restart] (Restart)

@@ -1,4 +1,0 @@
-[submenu] (Script)
-      # You can write your script startup in here
-      #[exec] (script) {xterm -e sh -c 'script-start ; bash'}
-[end]
