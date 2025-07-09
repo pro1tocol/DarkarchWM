@@ -116,7 +116,7 @@ bar {
         position top
 		# The fonts
 		font pango:SFMono Nerd Font Mono, Microsoft YaHei 15
-		workspace_buttons no
+		workspace_buttons yes
 		i3bar_command i3bar --transparency
 		status_command i3blocks
 		separator_symbol " "
