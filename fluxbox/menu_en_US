@@ -17,7 +17,7 @@
 [begin] (Core)
 [encoding] {UTF-8}
 [include] (~/.fluxbox/usermenu/app.menu)
-[submenu] (Default)
+      [exec] (Settings) {plasma-open-settings}
       [reconfig] (Reconfig)
 	  [restart] (Restart)
       [separator]
@@ -25,7 +25,6 @@
       [config] (Configuration)
       [submenu] (Style) {Choose a style...}
           [stylesdir] (/usr/share/fluxbox/styles)
-      [end]
 #[submenu] (User themes) {Choose a style...}
 #      [stylesdir] (~/.fluxbox/styles)
 #[end]

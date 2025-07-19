@@ -17,7 +17,7 @@
 [begin] (核心控制)
 [encoding] {UTF-8}
 [include] (~/.fluxbox/usermenu/app.menu)
-[submenu] (默认设置)
+      [exec] (功能设置) {plasma-open-settings}
       [reconfig] (重载配置)
 	  [restart] (刷新配置)
       [separator]
@@ -31,7 +31,6 @@
 #[end]
       #[commanddialog] (执行命令)
 #      [exec] (About) {(fluxbox -v; fluxbox -info | sed 1d) | xmessage -file - -center}
-[end]
       [exit] (注销)
 [endencoding]
 [end]
