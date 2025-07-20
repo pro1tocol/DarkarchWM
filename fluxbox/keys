@@ -90,7 +90,7 @@ XF86MonBrightnessUp :Exec brightnessctl set +5% -q
 XF86MonBrightnessDown :Exec brightnessctl set 5%- -q
 
 # current window commands
-Mod1 F4 :Close
+Mod1 q :Close
 Mod1 F5 :Kill
 #Mod1 F9 :Minimize
 #Mod1 F10 :Maximize
