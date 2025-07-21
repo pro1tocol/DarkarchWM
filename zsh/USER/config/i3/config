@@ -42,7 +42,7 @@ bindsym $mod+q kill
 #bindsym $mod2+d exec --no-startup-id dmenu_run -fn 'Microsoft YaHei-22' -l 15 -p "Run"
 bindsym $mod2+r exec --no-startup-id rofi -show run -theme DarkarchWM
 bindsym $mod2+d exec --no-startup-id rofi -show drun -theme DarkarchWM
-bindsym $mod2+l exec --no-startup-id exec $HOME/.config/i3/i3lock-color
+bindsym $mod2+q exec --no-startup-id $HOME/.config/i3/i3lock-color
 
 # Change focus
 bindsym $mod+h focus left
