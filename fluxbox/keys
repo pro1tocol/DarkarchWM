@@ -70,6 +70,7 @@ Mod1 F1 :Exec xterm
 #Mod1 F2 :Exec fbrun
 
 # open a application
+Mod4 q :Exec $HOME/.fluxbox/i3lock-color
 Mod4 r :Exec rofi -show run -theme DarkarchWM
 Mod4 d :Exec rofi -show drun -theme DarkarchWM
 Mod1 f :Exec firefox
