@@ -47,12 +47,9 @@
 ```
 ##### Example
 ``` bash
-# Win + r : program menu
-# Win + d : application menu
 # Win + Shift + 2 : move window to workspace 2
 # Alt + l : move window to right
-# Win + l : resize window to bigger
-# Win + q : window to lock
+# Win + f : resize window to bigger
 ```
 
 #### The "Alt" Keys
@@ -73,6 +70,7 @@
 ``` bash
 # Win + r : run command
 # Win + d : run desktop application
+# Win + q : window to lock
 # Win + 1 : to workspace 1
 # Win + 2 : to workspace 2
 # Win + 3 : to workspace 3
