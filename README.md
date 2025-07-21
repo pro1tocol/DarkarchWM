@@ -50,13 +50,14 @@
 ```
 ##### Example
 ``` bash
-#Alt + Shift + h : move window to left
-#Win + Shift + 2 : move window to workspace 2
+# Alt + Shift + h : move window to left
+# Win + Shift + 2 : move window to workspace 2
 ```
 
 #### The "Alt" Keys
 ``` bash
 # Alt + F1 :open terminal
+# Alt + q :close window
 # Alt + p :open screenkey
 # Alt + c :open vscode
 # Alt + f :open firefox
@@ -72,6 +73,7 @@
 ``` bash
 # Win + r : run command
 # Win + d : run desktop application
+# Win + q : window lock
 # Win + 1 : to workspace 1
 # Win + 2 : to workspace 2
 # Win + 3 : to workspace 3
