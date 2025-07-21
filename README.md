@@ -11,7 +11,7 @@
 ## Build the Environment
 
   | Standards | x86_64/ARM           | Dependence                                                                                        |
-  | :-------- | :------------------- | :------------------------------------------------------------------------------------------------ |
+  | :--- | :--- | :--- |
   | Kernel    | linux-zen            | systemd/lvm                                                                                       |
   | Lander    | lxdm                 | gtk3/breeze-dark                                                                                  |
   | Manager   | Fluxbox              | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
@@ -47,14 +47,18 @@
 ```
 ##### Example
 ``` bash
-#Win + Shift + 2 : move window to workspace 2
-#Alt + l : move window to right
-#Win + l : resize window to bigger
+# Win + r : program menu
+# Win + d : application menu
+# Win + Shift + 2 : move window to workspace 2
+# Alt + l : move window to right
+# Win + l : resize window to bigger
+# Win + q : window to lock
 ```
 
 #### The "Alt" Keys
 ``` bash
 # Alt + F1 :open terminal
+# Alt + q :close window
 # Alt + p :open screenkey
 # Alt + c :open vscode
 # Alt + f :open firefox
