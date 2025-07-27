@@ -1,0 +1,13 @@
+#!/usr/bin/sh
+
+lstatus="$(brightnessctl | awk '/Current brightness:/ {print $4}' | sed 's/[^0-9]//g; s/^0//')"
+licon=󰛨
+
+echo "$licon $lstatus"%""
+
+case $BLOCK_BUTTON in
+	5) brightnessctl set 5%- -q && brightnessctl | awk '/Current brightness:/ {print $4}' | sed 's/[^0-9]//g; s/^0//'&& pkill -SIGRTMIN+2 i3blocks &
+		;;
+	4) brightnessctl set +5% -q && brightnessctl | awk '/Current brightness:/ {print $4}' | sed 's/[^0-9]//g; s/^0//' && pkill -SIGRTMIN+2 i3blocks &
+		;;
+esac
