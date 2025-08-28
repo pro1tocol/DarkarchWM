@@ -1,6 +1,6 @@
 ![image](./png/DarkarchWM.png)
 
-##### <p align="center"> This Repositorie is deeply customizable theme based on the [blackarch](https://blackarch.org/) </p>
+# <p align="center"> With i3wm on Fedora39 </p>
 
 ### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
@@ -10,20 +10,20 @@
 
 ## Build the Environment
 
-  | Standards | x86_64/ARM           | Dependence                                                                                        |
+  | Standards | x86_64/i686           | Dependence                                                                                        |
   | :--- | :--- | :--- |
-  | Kernel    | linux-zen            | systemd/lvm                                                                                       |
-  | Lander    | lxdm                 | gtk3/breeze-dark                                                                                  |
-  | Manager   | Fluxbox              | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
-  | Displays  | X11                  | picom/rofi/xf86-input-amdgpu                                                                      |
-  | Shell     | xterm                | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions/zsh-history-substring-search |
-  | Files     | ranger/dolphin       | devicons/gtk6ct/breeze-dark                                                                       |
-  | Fonts     | Microsoft/SFMonoNerd | others                                                                                            |
+  | Kernel    | linux 6.11           | systemd/lvm                                                                                       |
+  | Lander    | lxdm                 | gtk3/breeze-gtk                                                                                  |
+  | Manager   | i3/i3-blocks/i3lock-color              | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
+  | Displays  | X11                  | picom/rofi/amdgpu-dkms                                                                      |
+  | Shell     | xterm                | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions |
+  | Files     | ranger/dolphin       | w3m/w3m-img/breeze-gtk                                                                       |
+  | Fonts     | Microsoft/MesloLGMDZNerdFontMono | google-noto/SansMono/others                                                                                            |
   | Text      | vim/nano/code        | vim-molokai                                                                                       |
-  | Input     | fcitx5               | simple-dark/libxxf86vm/lib32-libxxf86vm/xf86-input-synaptics/xf86-input-libinput                  |
-  | Sound     | alsa-lib             | xf86-input-void/pactl                                                                             |
+  | Input     | fcitx5               | simple-dark/fcitx5/fcitx5-qt/fcitx5-gtk/fcitx5-rime/xinput                  |
+  | Sound     | alsa-utils             | libXxf86vm                                                                             |
   | Bluetooth | bluez                | bluetoothctl                                                                                      |
-  | Light     | brightnessctl        | xf86-input-evdev                                                                                  |
+  | Light     | brightnessctl        | libinput                                                                                  |
 
 ## See
 
