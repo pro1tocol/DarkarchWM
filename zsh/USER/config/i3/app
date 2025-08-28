@@ -1,0 +1,14 @@
+for_window [class="mpv"] floating enable
+for_window [class="gwenview"] floating enable
+for_window [class="firefox"] floating enable
+for_window [instance="netease-cloud-music"] floating enable
+for_window [instance="wechat"] floating enable
+for_window [instance="systemsettings"] floating enable
+bindsym --release $mod+s exec --no-startup-id plasma-open-settings
+for_window [instance="dolphin"] floating enable
+bindsym --release $mod+d exec --no-startup-id dolphin
+bindsym --release $mod+f exec --no-startup-id firefox
+bindsym --release $mod+c exec --no-startup-id code
+for_window [instance="putty"] floating enable
+bindsym --release $mod+t exec --no-startup-id putty
+bindsym --release $mod+p exec --no-startup-id screenkey -p fixed -g 15%x8%+80%-2%

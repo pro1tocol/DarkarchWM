@@ -1,0 +1,8 @@
+#!/usr/bin/sh
+
+foreground="#eeeeee"
+background="#000000"
+separator="#888888"
+
+color0="#6298e0"
+color1="#00ffff"

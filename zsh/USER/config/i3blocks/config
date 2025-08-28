@@ -1,0 +1,67 @@
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+#command=$HOME/.config/i3block/sh/*
+separator_block_width=12
+markup=none
+
+[window title]
+command=xdotool getactivewindow getwindowname
+interval=3
+
+# Network interface monitoring
+[iface]
+label= 
+command=echo "$(ip addr show | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' | grep -v '127.0.0' | head -n 1)"
+interval=10
+color=#00FFFF
+
+# Date status
+[date]
+command=echo "  $(date '+%Y-%m-%d %H:%M')"
+interval=52
+
+# CPU usage
+[cpu]
+#command=echo " $(mpstat --dec=0 | awk 'NR==4 {print 100 - $NF}')%"
+full_text=🌡 00.0°C  0.00 🗗  0.00% 🕷 00%
+command=$HOME/.config/i3blocks/sh/cpu
+interval=3
+color=#00FFFF
+
+# Disk usage
+[disk]
+label=🛢
+command=echo "$(df -h / | awk 'NR==2 {print $5}')"
+interval=52
+
+# Battery indicator
+[battery]
+# show path
+# ls /sys/class/power_supply/ | grep -E 'BAT[0-9]+|battery_BAT[0-9]+'
+#command=echo "$(cat /sys/class/power_supply/BAT1/capacity)%"
+command=$HOME/.config/i3blocks/sh/battery
+interval=30
+
+# Light setup
+[light]
+#command=echo " $(brightnessctl | awk '/Current brightness:/ {print $4}' | awk -F"(" {'print $2'} | awk -F")" {'print $1'}) "
+command=$HOME/.config/i3blocks/sh/light
+interval=3
+signal=2
+
+# Volume setup
+[volume]
+#command=echo " $(pactl get-sink-volume alsa_output.pci-0000_05_00.6.analog-stereo | awk '/Volume:/ {print $5}')"
+#command=echo " $(amixer get Master | awk '/Right:/ {print $5}' | awk -F"[" {'print $2'} | awk -F"]" {'print $1'})"
+command=$HOME/.config/i3blocks/sh/volume
+interval=3
+signal=1
+
+# User status
+[user]
+label=👽 
+command=echo "$(w | awk '/load average:/ {print $4,$5}' | grep -Eo '[0-9]') "
+interval=10
+
