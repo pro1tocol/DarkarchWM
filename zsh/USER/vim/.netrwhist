@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/data/home/C4ry/.config/i3blocks/sh'
+let g:netrw_dirhist_7='/data/home/C4ry/.config/i3'
+let g:netrw_dirhist_6='/boot/loader/entries'
+let g:netrw_dirhist_5='/boot/loader'
+let g:netrw_dirhist_4='/boot'
+let g:netrw_dirhist_3='/boot/efi'
+let g:netrw_dirhist_2='/boot/efi/loader'
+let g:netrw_dirhist_1='/boot/efi/loader/entries'
+let g:netrw_dirhist_0='/boot/loader/entries'
+let g:netrw_dirhist_9='/boot/loader'

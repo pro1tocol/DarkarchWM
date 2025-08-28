@@ -1,8 +1,8 @@
-XTerm*faceName: SFMono Nerd Font Mono
-XTerm*faceNameDoublesize: Microsoft YaHei 
-xterm*faceSize: 22
-xterm*vt100*geometry: 90x25
+XTerm*faceName: MesloLGMDZ Nerd Font Mono
+XTerm*faceNameDoublesize: Microsoft YaHei UI
+xterm*faceSize: 12
 xterm*saveLines: 16384
+xterm*scrollBar: false
 xterm*termName: xterm-color
 xterm*eightBitInput: false
 xterm*background: black

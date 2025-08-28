@@ -9,11 +9,11 @@ include /usr/share/nano/css.nanorc
 include /usr/share/nano/default.nanorc
 include /usr/share/nano/elisp.nanorc
 include /usr/share/nano/email.nanorc
-include /usr/share/nano/extra/ada.nanorc
-include /usr/share/nano/extra/fortran.nanorc
-include /usr/share/nano/extra/haskell.nanorc
-include /usr/share/nano/extra/povray.nanorc
-include /usr/share/nano/extra/spec.nanorc
+include /usr/share/nano/ada.nanorc
+include /usr/share/nano/fortran.nanorc
+include /usr/share/nano/haskell.nanorc
+include /usr/share/nano/povray.nanorc
+include /usr/share/nano/spec.nanorc
 include /usr/share/nano/go.nanorc
 include /usr/share/nano/groff.nanorc
 include /usr/share/nano/guile.nanorc

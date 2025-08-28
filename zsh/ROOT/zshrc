@@ -3,9 +3,8 @@
 #
 #
 # Plugins into zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ $- != *i* ]] && return
 
@@ -18,7 +17,7 @@ esac
 autoload -U colors && colors
 
 NEWLINE=$'\n'
-PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*)-> %{$reset_color%}%b"
+PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*) %{$reset_color%}%b"
 
 autoload -U compinit
 compinit
@@ -78,7 +77,7 @@ fi
 alias ll='ls -lF --color=auto -lAF'
 alias l='ls -l --color=auto'
 alias ls='ls --color=auto'
-alias netr="netstat -rn -f inet"
+alias netr="netstat -rn"
 alias netp="netstat -ant | grep LISTEN"
 alias netu="netstat -anut | grep udp"
 alias neta="netstat -anotp"

@@ -2,4 +2,5 @@ export GTK_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export QT_IM_MODULE=fcitx
 export DESKTOP_SESSION=kde
+export QT_QPA_PLATFORMTHEME=qt6ct
 fcitx5 &
