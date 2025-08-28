@@ -18,7 +18,7 @@
   | Displays  | X11                  | picom/rofi/amdgpu-dkms                                                                      |
   | Shell     | xterm                | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions |
   | Files     | ranger/dolphin       | w3m/w3m-img/breeze-gtk                                                                       |
-  | Fonts     | Microsoft/MesloLGMDZNerdFontMono | google-noto/SansMono/others                                                                                            |
+  | Fonts     | Microsoft/MesloLGMNerdFontMono | google-noto/SansMono/others                                                                                            |
   | Text      | vim/nano/code        | vim-molokai                                                                                       |
   | Input     | fcitx5               | simple-dark/fcitx5/fcitx5-qt/fcitx5-gtk/fcitx5-rime/xinput                  |
   | Sound     | alsa-utils             | libXxf86vm                                                                             |
