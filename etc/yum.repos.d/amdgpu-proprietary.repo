@@ -1,8 +1,0 @@
-# Enabling this repository requires acceptance of the following license:
-# /usr/share/amdgpu-install/AMDGPUPROEULA
-[amdgpu-proprietary]
-name=AMDGPU 6.4.3 Proprietary repository
-baseurl=https://repo.radeon.com/amdgpu/6.4.3/rhel/9.6/proprietary/x86_64
-enabled=0
-gpgcheck=1
-gpgkey=file:///etc/amdgpu-install/rocm.gpg.key
