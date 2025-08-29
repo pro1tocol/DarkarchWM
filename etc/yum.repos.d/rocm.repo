@@ -1,0 +1,7 @@
+[rocm]
+name=ROCm 6.4.3 repository
+baseurl=https://repo.radeon.com/rocm/el9/6.4.3/main
+enabled=1
+gpgcheck=1
+priority=50
+gpgkey=file:///etc/amdgpu-install/rocm.gpg.key
