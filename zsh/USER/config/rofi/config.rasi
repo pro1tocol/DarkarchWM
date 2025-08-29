@@ -1,4 +1,4 @@
 configuration {
 	font: "Microsoft YaHei 22";
-	show-icons: true;
+	show-icons: false;
 }
