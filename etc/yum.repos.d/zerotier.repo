@@ -1,5 +1,0 @@
-[zerotier]
-name=ZeroTier, Inc. RPM Release Repository
-baseurl=http://download.zerotier.com/redhat/fc/39
-enabled=1
-gpgcheck=1
