@@ -9,7 +9,7 @@ then
 
     echo "🗲$BAT_LEVEL_ALL"
     
-    if [ "$IS_CHARGING" = "Charging" ]
+    if [ "$IS_CHARGING" = "Discharging" ]
     then
         echo "#00FFFF"
     else
