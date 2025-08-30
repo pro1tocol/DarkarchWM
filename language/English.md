@@ -157,7 +157,7 @@ sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot
 #### DarkarchWM required component
 ``` shell
 sudo dnf install -y plasma-breeze kde-style-breeze breeze-icon-theme breeze-icon-theme-devel breeze-gtk.noarch
-sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-
+sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-gtk-gtk4.noarch breeze-cursor-theme.noarch
 sudo dnf install -y xterm dolphin gwenview mpv plasma-desktop plasma-pa plasma-nm plasma-thunderbolt
 sudo dnf install -y kscreen powerdevil gnome-screenshot gnome-calculator
 sudo dnf install -y kde-gtk-config qt5ct qt6ct adwaita-qt5 adwaita-qt6
@@ -167,7 +167,7 @@ gsettings get org.gnome.desktop.interface color-scheme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 # disable plasma-wecom and avahi-daemon
 sudo dnf remove -y plasma-welcome
-sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.servic
+sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.service
 ```
 #### Install the input method
 ``` shell

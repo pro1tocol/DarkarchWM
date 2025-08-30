@@ -142,6 +142,7 @@ sudo usermod -a -G render,video $LOGNAME
 sudo dnf install -y rocm
 sudo usermod -aG render,video $USER
 	# 退出后重新登录用户使用groups查看分组信息
+
 ```
 #### 安装设备组件
 ``` shell
@@ -157,7 +158,7 @@ sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot
 #### DarkarchWM必备组件部署
 ``` shell
 sudo dnf install -y plasma-breeze kde-style-breeze breeze-icon-theme breeze-icon-theme-devel breeze-gtk.noarch
-sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-
+sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-gtk-gtk4.noarch breeze-cursor-theme.noarch
 sudo dnf install -y xterm dolphin gwenview mpv plasma-desktop plasma-pa plasma-nm plasma-thunderbolt
 sudo dnf install -y kscreen powerdevil gnome-screenshot gnome-calculator
 sudo dnf install -y kde-gtk-config qt5ct qt6ct adwaita-qt5 adwaita-qt6
@@ -167,7 +168,7 @@ gsettings get org.gnome.desktop.interface color-scheme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 # 禁用欢迎界面及avahi-daemon组件
 sudo dnf remove -y plasma-welcome
-sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.servic
+sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.service
 ```
 #### 安装输入法
 ``` shell
