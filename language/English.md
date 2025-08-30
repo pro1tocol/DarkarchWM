@@ -108,6 +108,11 @@ sudo cp etc/vconsole.conf /etc
 ### Use rpmfusion sources
 ``` shell
 sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# switch sources(options)
+sudo sed -e 's|^metalink=|#metalink=|g' \
+         -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
+         -i.bak \
+         /etc/yum.repos.d/rpmfusion*.repo
 sudo dnf clean all && sudo dnf makecache
 ```
 ### Create an admin user
@@ -122,7 +127,7 @@ cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
 su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.i
+sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 ```
 #### Installation tools and graphics card drivers
 ``` shell

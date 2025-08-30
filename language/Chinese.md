@@ -108,6 +108,11 @@ sudo cp etc/vconsole.conf /etc
 ### 启用rpmfusion镜像源
 ``` shell
 sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# 替换源地址(可选)
+sudo sed -e 's|^metalink=|#metalink=|g' \
+         -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
+         -i.bak \
+         /etc/yum.repos.d/rpmfusion*.repo
 sudo dnf clean all && sudo dnf makecache
 ```
 ### 建立管理员用户
@@ -122,7 +127,7 @@ cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
 su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.i
+sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 ```
 #### 安装工具及显卡驱动
 ``` shell
