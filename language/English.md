@@ -54,7 +54,7 @@ sudo dnf clean all && sudo dnf makecache # update sources
 ```
 #### uninstall packages
 ``` shell
-sudo dnf remove -y cockpit systemd-resolved
+sudo dnf remove -y cockpit systemd-resolved plymouth
 sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
 sudo dnf install -y openssl NetworkManager-tui
 ```
