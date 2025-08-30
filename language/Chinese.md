@@ -122,7 +122,7 @@ sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HO
 #### 安装工具及显卡驱动
 ``` shell
 sudo dnf install wget git curl tar zip unzip gzip fastfetch btop iotop iftop nano -y
-# AMD核显设置
+# AMD核显设置(可选)
 sudo dnf install -y https://repo.radeon.com/amdgpu-install/6.4.3/rhel/9.6/amdgpu-install-6.4.60403-1.el9.noarch.rpm
 sudo vim /etc/yum.repos.d/amdgpu.repo
 	# 将$amdgpudistro修改为9.6
