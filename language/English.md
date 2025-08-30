@@ -52,11 +52,16 @@ cd etc/yum.repos.d
 sudo cp ./* /etc/yum.repos.d
 sudo dnf clean all && sudo dnf makecache # update sources
 ```
+#### uninstall packages
+``` shell
+sudo dnf remove -y cockpit systemd-resolved
+sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
+sudo dnf install -y openssl NetworkManager-tui
+```
 #### Switch the $SHELL and update the system
 ``` shell
-sudo dnf makecache
-sudo dnf remove -y cockpit systemd-resolved
-sudo dnf install -y openssl && reboot
+sudo dnf install -y zsh zsh-autosuggestions zsh-syntax-highlighting.noarch && sudo chsh -s /bin/zsh
+sudo dnf update -y && reboot # update and restart
 ```
 ### Switch systemd-boot environment
 ``` shell
