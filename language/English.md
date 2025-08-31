@@ -35,6 +35,11 @@ sudo vim /etc/selinux/config # close selinux permanent
 	SELINUX=disable
 sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service # stop firewall
 ```
+#### Uninstall packages
+``` shell
+sudo dnf remove -y cockpit systemd-resolved plymouth
+sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
+```
 #### Copy the file to $HOME(root)
 ``` shell
 su root && whoami
@@ -51,11 +56,6 @@ mv $HOME/vim $HOME/.vim
 cd etc/yum.repos.d
 sudo cp ./* /etc/yum.repos.d
 sudo dnf clean all && sudo dnf makecache # update sources
-```
-#### uninstall packages
-``` shell
-sudo dnf remove -y cockpit systemd-resolved plymouth
-sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
 sudo dnf install -y openssl NetworkManager-tui
 ```
 #### Switch the $SHELL and update the system
@@ -107,7 +107,8 @@ sudo cp etc/vconsole.conf /etc
 ```
 ### Use rpmfusion sources
 ``` shell
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm 
+sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 # switch sources(options)
 sudo sed -e 's|^metalink=|#metalink=|g' \
          -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
@@ -127,7 +128,8 @@ cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
 su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
+sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc
+sudo chown alarm:alarm -R $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 ```
 #### Installation tools and graphics card drivers
 ``` shell
@@ -142,17 +144,37 @@ sudo usermod -a -G render,video $LOGNAME
 sudo dnf install -y rocm
 sudo usermod -aG render,video $USER
 	# after logging out, users log back in using groups to view group information
+
+# Nvidia独显设置
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
+sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
+sudo dnf makecache
+sudo dnf install -y kernel-headers kernel-devel tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms
+sudo dnf module list nvidia-driver # show all nvidia driver module
+sudo dnf module install nvidia-driver:latest-dkms # install driver
+sudo vim xorg.conf.d/10-nvidia.conf
+	Option "PrimaryGPU" "no" # the 3D driver setup
+cd /boot/efi
+sudo cp /boot/initramfs-* /boot/efi
+sudo cp /boot/vmlinuz-* /boot/efi
+sudo cp /boot/System.map-* /boot/efi
+
+# Intel核显设置
+sudo dnf install -y intel-media-driver
+sudo lsmod | grep i915
 ```
 #### Install the equipment components
 ``` shell
 # Bluetooth, NTFS format, and USB driver
 sudo dnf install -y bluez bluez-tools ntfs-3g usbutils bluedevil bluez-libs bluez-libs-devel
 # X11 Environment Drive Display
-sudo dnf install -y xorg-x11-server-devel xorg-x11-server-Xorg xorg-x11-font-utils xorg-x11-server-Xwayland xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x11-drv-libinput
+sudo dnf install -y xorg-x11-server-devel xorg-x11-server-Xorg xorg-x11-font-utils xorg-x11-server-Xwayland
+sudo dnf install -y xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x11-drv-libinput
 # X11 environment drives input keys, touchpad and sound
 sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel
 # Sound drive, backlight driven, frequency power consumption acquisition driven
-sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot
+sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors
 ```
 #### DarkarchWM required component
 ``` shell

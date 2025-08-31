@@ -35,6 +35,11 @@ sudo vim /etc/selinux/config # 修改selinux参数
 	SELINUX=disable # 永久关闭selinux端口标准控制
 sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service # 禁用防火墙
 ```
+#### 卸载客户端不常用软件包
+``` shell
+sudo dnf remove -y cockpit systemd-resolved plymouth
+sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
+```
 #### 将文件拷贝至$HOME(root)下
 ``` shell
 su root && whoami
@@ -51,11 +56,6 @@ mv $HOME/vim $HOME/.vim
 cd etc/yum.repos.d
 sudo cp ./* /etc/yum.repos.d
 sudo dnf clean all && sudo dnf makecache # 更新包管理器源环境
-```
-#### 卸载客户端不常用软件包
-``` shell
-sudo dnf remove -y cockpit systemd-resolved plymouth
-sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
 sudo dnf install -y openssl NetworkManager-tui
 ```
 #### 切换$SHELL环境并更新系统
@@ -107,7 +107,8 @@ sudo cp etc/vconsole.conf /etc
 ```
 ### 启用rpmfusion镜像源
 ``` shell
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 # 替换源地址(可选)
 sudo sed -e 's|^metalink=|#metalink=|g' \
          -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
@@ -127,11 +128,13 @@ cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
 su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
+sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc
+sudo chown alarm:alarm -R $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 ```
 #### 安装工具及显卡驱动
 ``` shell
 sudo dnf install wget git curl tar zip unzip gzip fastfetch btop iotop iftop nano -y
+
 # AMD核显设置(可选)
 sudo dnf install -y https://repo.radeon.com/amdgpu-install/6.4.3/rhel/9.6/amdgpu-install-6.4.60403-1.el9.noarch.rpm
 sudo vim /etc/yum.repos.d/amdgpu.repo
@@ -143,17 +146,36 @@ sudo dnf install -y rocm
 sudo usermod -aG render,video $USER
 	# 退出后重新登录用户使用groups查看分组信息
 
+# Nvidia独显设置
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
+sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
+sudo dnf makecache
+sudo dnf install -y kernel-headers kernel-devel tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms
+sudo dnf module list nvidia-driver # show all nvidia driver module
+sudo dnf module install nvidia-driver:latest-dkms # install driver
+sudo vim xorg.conf.d/10-nvidia.conf
+	Option "PrimaryGPU" "no" # the 3D driver setup
+cd /boot/efi
+sudo cp /boot/initramfs-* /boot/efi
+sudo cp /boot/vmlinuz-* /boot/efi
+sudo cp /boot/System.map-* /boot/efi
+
+# Intel核显设置
+sudo dnf install -y intel-media-driver
+sudo lsmod | grep i915
 ```
 #### 安装设备组件
 ``` shell
 # 蓝牙、ntfs格式以及usb驱动
 sudo dnf install -y bluez bluez-tools ntfs-3g usbutils bluedevil bluez-libs bluez-libs-devel
 # X11环境下驱动显示器
-sudo dnf install -y xorg-x11-server-devel xorg-x11-server-Xorg xorg-x11-font-utils xorg-x11-server-Xwayland xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x11-drv-libinput
+sudo dnf install -y xorg-x11-server-devel xorg-x11-server-Xorg xorg-x11-font-utils xorg-x11-server-Xwayland
+sudo dnf install -y xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x11-drv-libinput
 # X11环境下驱动输入键位、触摸板、声音调节
 sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel
 # 声卡驱动、背光驱动，频率功耗采集驱动
-sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot
+sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors
 ```
 #### DarkarchWM必备组件部署
 ``` shell
@@ -198,6 +220,7 @@ sudo cp systemd/logind.conf /etc/systemd
 ``` shell
 sudo systemctl start lxdm.service
 ```
+---
 ### 还原管理员用户配置
 ``` shell
 su alarm
