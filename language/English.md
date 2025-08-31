@@ -145,7 +145,7 @@ sudo dnf install -y rocm
 sudo usermod -aG render,video $USER
 	# after logging out, users log back in using groups to view group information
 
-# Nvidia独显设置
+# Nvidia graphics settings(options)
 echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
 sudo dracut --force
 sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
@@ -160,7 +160,7 @@ sudo cp /boot/initramfs-* /boot/efi
 sudo cp /boot/vmlinuz-* /boot/efi
 sudo cp /boot/System.map-* /boot/efi
 
-# Intel核显设置
+# Intel graphics settings(options)
 sudo dnf install -y intel-media-driver
 sudo lsmod | grep i915
 ```
