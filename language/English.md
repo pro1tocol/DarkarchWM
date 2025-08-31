@@ -37,7 +37,7 @@ sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.servic
 ```
 #### Uninstall packages
 ``` shell
-sudo dnf remove -y cockpit systemd-resolved plymouth
+sudo dnf remove -y cockpit cockpit-system cockpit-bridge cockpit-packagekit systemd-resolved plymouth
 sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
 ```
 #### Copy the file to $HOME(root)
@@ -147,12 +147,12 @@ sudo usermod -aG render,video $USER
 
 # Nvidia graphics settings(options)
 echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
-sudo dracut --force
 sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
 sudo dnf makecache
 sudo dnf install -y kernel-headers kernel-devel tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms
 sudo dnf module list nvidia-driver # show all nvidia driver module
 sudo dnf module install nvidia-driver:latest-dkms # install driver
+sudo dracut --force
 sudo vim xorg.conf.d/10-nvidia.conf
 	Option "PrimaryGPU" "no" # the 3D driver setup
 cd /boot/efi
