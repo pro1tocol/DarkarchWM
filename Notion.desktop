@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Notion.AppImage
+Exec=/data/sbin/Notion-2.3.2-1-x86-64.AppImage
+Name=Notion
+StartupNotify=false
+Terminal=false
+Type=Application
+Categories=Developer
