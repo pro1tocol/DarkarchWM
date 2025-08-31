@@ -175,7 +175,7 @@ sudo dnf install -y xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x1
 # X11环境下驱动输入键位、触摸板、声音调节
 sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel
 # 声卡驱动、背光驱动，频率功耗采集驱动
-sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors
+sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors libatomic
 ```
 #### DarkarchWM必备组件部署
 ``` shell

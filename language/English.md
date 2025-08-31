@@ -174,7 +174,7 @@ sudo dnf install -y xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x1
 # X11 environment drives input keys, touchpad and sound
 sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel
 # Sound drive, backlight driven, frequency power consumption acquisition driven
-sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors
+sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors libatomic
 ```
 #### DarkarchWM required component
 ``` shell
