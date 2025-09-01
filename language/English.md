@@ -167,7 +167,7 @@ sudo lsmod | grep i915
 #### DarkarchWM required component
 ``` shell
 # run script
-bash app/install
+bash language/install
 # gnome default dark
 gsettings get org.gnome.desktop.interface color-scheme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
