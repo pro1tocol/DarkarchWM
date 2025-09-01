@@ -164,26 +164,10 @@ sudo cp /boot/System.map-* /boot/efi
 sudo dnf install -y intel-media-driver
 sudo lsmod | grep i915
 ```
-#### Install the equipment components
-``` shell
-# Bluetooth, NTFS format, and USB driver
-sudo dnf install -y bluez bluez-tools ntfs-3g usbutils bluedevil bluez-libs bluez-libs-devel
-# X11 Environment Drive Display
-sudo dnf install -y xorg-x11-server-devel xorg-x11-server-Xorg xorg-x11-font-utils xorg-x11-server-Xwayland
-sudo dnf install -y xorg-x11-server-common xorg-x11-xinit xorg-x11-xauth xorg-x11-drv-libinput
-# X11 environment drives input keys, touchpad and sound
-sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel
-# Sound drive, backlight driven, frequency power consumption acquisition driven
-sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors libatomic
-```
 #### DarkarchWM required component
 ``` shell
-sudo dnf install -y plasma-breeze kde-style-breeze breeze-icon-theme breeze-icon-theme-devel breeze-gtk.noarch
-sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-gtk-gtk4.noarch breeze-cursor-theme.noarch
-sudo dnf install -y xterm dolphin gwenview mpv plasma-desktop plasma-pa plasma-nm plasma-thunderbolt
-sudo dnf install -y kscreen powerdevil gnome-screenshot gnome-calculator
-sudo dnf install -y kde-gtk-config qt5ct qt6ct adwaita-qt5 adwaita-qt6
-sudo dnf install -y bc fzf less picom screenkey slop libappindicator-gtk3
+# run script
+bash app/install
 # gnome default dark
 gsettings get org.gnome.desktop.interface color-scheme
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
