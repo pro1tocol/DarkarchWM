@@ -1,18 +1,18 @@
 ![image](./png/DarkarchWM.png)
 
-# <p align="center"> With i3wm on Fedora39 </p>
+# <p align="center"> on Archlinux-lts kernel </p>
 
 ### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
 ## Instructions
-- ##### This theme can be built in archlinux
-- ##### The operating environment is extremely lightweight
+- ##### A lightweight GUI theme for Xorg
+- ##### This theme can be installed on Archlinux
 
 ## Build the Environment
 
-  | Standards | x86_64/i686           | Dependence                                                                                        |
+  | Standards | x86_64/arm           | Dependence                                                                                        |
   | :--- | :--- | :--- |
-  | Kernel    | linux 6.11           | systemd/lvm                                                                                       |
+  | Kernel    | linux 6.12           | systemd/lvm                                                                                       |
   | Lander    | lxdm                 | gtk3/breeze-gtk                                                                                  |
   | Manager   | i3/i3-blocks/i3lock-color              | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
   | Displays  | X11                  | picom/rofi/amdgpu-dkms                                                                      |
