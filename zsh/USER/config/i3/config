@@ -5,7 +5,7 @@
 # Application include
 include $HOME/.config/i3/app
 # Fonts setup
-font pango:MesloLGM Nerd Font Mono, Microsoft YaHei 14
+font pango:MesloLGM Nerd Font Mono, Microsoft YaHei 12
 # Default key
 set $mod Mod1
 set $mod2 Mod4
