@@ -20,184 +20,207 @@
 | ./zsh/ROOT/*                  | /root/*                       | zsh/vim/nano support                       | ⬜️          |
 | ./zsh/USER/*                  | ~/*                           | Some User's config support                 | &#9745;    |
 
+## Install Archlinux
+### Build storage
+``` shell
+parted /dev/nvme0n1
+mklabel gpt
+mkpart ESP 4096s 769M
+mkpart primary 769M -1
+set 1 boot on
+# show storage status
+lsblk
+fdisk -l
+```
+### Format the storage
+``` shell
+mkfs.fat -F32 /dev/nvme0n1p1
+```
+### Create LVM storage and mount
+``` shell
+pvcreate /dev/nvme0n1p2
+vgcreate linux /dev/nvme0n1p2
+lvcreate -l +100%FREE linux -n root
+# reset format the lvm2 storage
+mkfs.btrfs /dev/mapper/linux-root
+lvs # show lvm2 storage status
+mount /dev/mapper/linux-root /mnt
+mkdir -p /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+df -h # show mounting status
+```
 ## System init
-### You need to configure it in a clean system environment
+### Install the system
 ``` shell
-sudo systemctl stop cockpit.socket && sudo systemctl disable cockpit.socket
-sudo systemctl stop cockpit.service && sudo systemctl disable cockpit.service # stop web connect
-sudo vim /etc/ssh/sshd_config
-sudo setenforce 0 # disable selinux and reboot restart
-sudo systemctl restart sshd
+# this step need internet
+echo 'Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+sudo pacman-key --init && sudo pacman-key --populate archlinux
+sudo pacman -Syy && sudo pacman -S archlinux-keyring
+pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode/amd-ucode # install testing 
+bash language/Install
+genfstab -U /mnt > /mnt/etc/fstab # write to fstab
+cat /mnt/etc/fstab # show writing status
 ```
-### The ssh connect
+### Init setup
 ``` shell
-sudo vim /etc/selinux/config # close selinux permanent
-	SELINUX=disable
-sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service # stop firewall
+arch-chroot /mnt
+vim /etc/hostname # device rename
+# add Chinese
+vim /etc/locale.gen
+    en_US.UTF-8 UTF-8
+    zh_CN.UTF-8 UTF-8
+# flash language 
+locale-gen
+echo 'LANG=en_US.UTF-8'  > /etc/locale.conf
+# fix fonts
+echo "KEYMAP=us" > /etc/vconsole.conf
+echo "FONT=lat9u-16" >> /etc/vconsole.conf
+mkinitcpio -P # create kernel files
 ```
-#### Uninstall packages
+#### Git clone repository
 ``` shell
-sudo dnf remove -y cockpit cockpit-system cockpit-bridge cockpit-packagekit systemd-resolved plymouth
-sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
+mkdir -p /data/git && cd /data/git
+git clone -b lts --single-branch https://github.com/pro1tocol/DarkarchWM.git
+mv DarkarchWM DarkarchWM_lts && cd DarkarchWM_lts && pwd
 ```
-#### Copy the file to $HOME(root)
+#### Update $HOME(root) and update kernel mkinitcpio
 ``` shell
-su root && whoami
+passwd root # changer the root password
 cd zsh/ROOT/
 sudo cp -rf ./* $HOME
 mv $HOME/inputrc $HOME/.inputrc
 mv $HOME/nanorc $HOME/.nanorc
 mv $HOME/vimrc $HOME/.vimrc
 mv $HOME/zshrc $HOME/.zshrc
-mv $HOME/vim $HOME/.vim
+echo $SHELL # changer default shell environment 
+    # /bin/bash
+chsh -s /bin/zsh # change to zsh
+# update kernel files
+vim /etc/mkinitcpio.conf
+# ...
+	HOOKS=(base systemd udev autodetect microcode modconf kms keyboard keymap consolefont block lvm2 filesystems fsck)
+# ...
+mkinitcpio -p linux-lts # run update 
 ```
-#### Copy the file to path: /etc/yum.repos.d
+#### Systemd-boot show config
 ``` shell
-cd etc/yum.repos.d
-sudo cp ./* /etc/yum.repos.d
-sudo dnf clean all && sudo dnf makecache # update sources
-sudo dnf install -y openssl NetworkManager-tui
+bootctl status # show boot status
+ls -l /boot # show boot some files
+cat /etc/fstab # show storage status(record UUID)
 ```
-#### Switch the $SHELL and update the system
+#### Systemd-boot setup
 ``` shell
-sudo dnf install -y zsh zsh-autosuggestions zsh-syntax-highlighting.noarch && sudo chsh -s /bin/zsh
-sudo dnf update -y && reboot # update and restart
-```
-### Switch systemd-boot environment
-``` shell
-uname -srm && sudo dnf remove --oldinstallonly -y # uninstall old kernal
-cd /boot/efi
-sudo dnf install -y systemd-boot-unsigned
-sudo bootctl install # install systemd-boot
-sudo vim loader/loader.conf
+bootctl install
+cd /boot
+sudo vim loader/loader.conf # change the boot way
 	default DarkarchWM.conf
 	timeout 3
     console-mode max
     editor no
 sudo vim loader/entries/DarkarchWM.conf
     title   DarkarchWM
-    linux   /vmlinuz-6.11.9-100.fc39.x86_64
-    initrd  /initramfs-6.11.9-100.fc39.x86_64.img
-	options /System.map-6.11.9-100.fc39.x86_64
-    options root=/dev/mapper/fedora-root ro rd.lvm.lv=fedora/root rhgb quiet
+    linux   /vmlinuz-linux-lts
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux-lts.img
+    options root=/dev/mapper/linux-root ro rd.lvm.lv=linux/root quiet
 sudo vim loader/entries/DarkarchWM-fallback.conf
     title   DarkarchWM(fallback)
-    linux   /vmlinuz-0-rescue-e2cc20db2f514b85babdae307d927ebf
-    initrd  /initramfs-0-rescue-e2cc20db2f514b85babdae307d927ebf.img
-    options /System.map-6.11.9-100.fc39.x86_64
-    options root=/dev/mapper/fedora-root ro rd.lvm.lv=fedora/root rhgb quiet
-sudo cp /boot/initramfs-* /boot/efi
-sudo cp /boot/vmlinuz-* /boot/efi
-sudo cp /boot/System.map-* /boot/efi
-sudo bootctl status # show boot status
-sudo bootctl list # show boot list
-reboot # test
+    linux   /vmlinuz-linux-lts
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux-lts-fallback.img
+    options root=/dev/mapper/linux-root ro rd.lvm.lv=linux/root quiet
+bootctl status
+bootctl list # verify boot
+exit
+umount -R /mnt && reboot # restart the system validation takes effect
+```
+### Update mirrors sources and mirors kering
+``` shell
+# change archlinux mirrors sources in you country
+vim /etc/pacman.conf
+    [multilib]
+    #Inclu...
+    [archlinuxcn]
+    Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+# update mirrors sources keyring
+pacman-key --init && pacman-key --populate archlinux
+pacman -Syy && pacman -Syu
+pacman -S archlinux-keyring archlinuxcn-keyring && pacman -S yay
 ```
 ---
-### Renew device name
+### Create admin user
 ``` shell
-# modify the hostname
-vim /etc/hostname
-# copy the fonts
-cd /mnt/hgfs/DarkarchWM_fedora39
-sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts
-sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts
-# copy the default SHELL font
-sudo cp etc/vconsole.conf /etc
-```
-### Use rpmfusion sources
-``` shell
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm 
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-# switch sources(options)
-sudo sed -e 's|^metalink=|#metalink=|g' \
-         -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
-         -i.bak \
-         /etc/yum.repos.d/rpmfusion*.repo
-sudo dnf clean all && sudo dnf makecache
-```
-### Create an admin user
-``` shell
-useradd -m -G wheel -s /bin/zsh alarm && passwd alarm
-cd /mnt/hgfs/DarkarchWM_fedora39/zsh/USER/
+useradd -m -G wheel -s /bin/zsh alarm # create user
+passwd alarm
+# modify permissions
+EDITOR=vim visudo
+%wheel ALL=(ALL: ALL) ALL
+# adjust path permissions
+sudo chown alarm:alarm -R /data
+cd /data/git/DarkarchWM_lts
+su C4ry
 cp inputrc /home/alarm/.inputrc
 cp nanorc /home/alarm/.nanorc
 cp vimrc /home/alarm/.vimrc
-cp -rf vim /home/alarm/.vim
 cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
-su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc
-sudo chown alarm:alarm -R $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 ```
-#### Installation tools and graphics card drivers
+### Fix kernel mkinitcpio
 ``` shell
-sudo dnf install wget git curl tar zip unzip gzip fastfetch btop iotop iftop nano -y
-# AMD graphics settings(options)
-sudo dnf install -y https://repo.radeon.com/amdgpu-install/6.4.3/rhel/9.6/amdgpu-install-6.4.60403-1.el9.noarch.rpm
-sudo vim /etc/yum.repos.d/amdgpu.repo
-	# modify the variable $amdgpudistro to 9.6
-sudo dnf makecache
-sudo dnf install -y python3-setuptools python3-wheel gcc tcl
-sudo usermod -a -G render,video $LOGNAME
-sudo dnf install -y rocm
-sudo usermod -aG render,video $USER
-	# after logging out, users log back in using groups to view group information
+cd /data/git/DarkarchWM_i3
+su alarm
+cp -rf zsh/USER/cache/* $HOME/.cache/yay
+cd $HOME/.cache/yay
+tar -xJvf aic94xx-firmware.tar.xz && \
+tar -xJvf ast-firmware.tar.xz && \
+tar -xJvf mkinitcpio-firmware.tar.xz && \
+tar -xJvf upd72020x-fw.tar.xz && \
+tar -xJvf wd719x-firmware.tar.xz
+yay -S aic94xx-firmware ast-firmware mkinitcpio-firmware upd72020x-fw wd719x-firmware # install model
+yay -S fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime # install the input method
+su root
+mkinitcpio -p linux-lts # fix model
+```
+### Install tool nad graphics device
+``` shell
+# intel
+yay -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel # run on the base
 
-# Nvidia graphics settings(options)
-echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
-sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
-sudo dnf makecache
-sudo dnf install -y kernel-headers kernel-devel tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms
-sudo dnf module list nvidia-driver # show all nvidia driver module
-sudo dnf module install nvidia-driver:latest-dkms # install driver
-sudo dracut --force
-sudo vim xorg.conf.d/10-nvidia.conf
-	Option "PrimaryGPU" "no" # the 3D driver setup
-cd /boot/efi
-sudo cp /boot/initramfs-* /boot/efi
-sudo cp /boot/vmlinuz-* /boot/efi
-sudo cp /boot/System.map-* /boot/efi
+# amd
+yay -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon  lib32-vulkan-radeon libva-mesa-driver
 
-# Intel graphics settings(options)
-sudo dnf install -y intel-media-driver
-sudo lsmod | grep i915
+# Nvidia-open
+yay -S nvidia-open-lts nvidia-settings lib32-nvidia-utils nvidia-utils
+# disable kms model (options)
+# sudo vim /etc/mkinitcpio.conf
+
+# Nvidia
+yay -S nvidia-lts nvidia-settings lib32-nvidia-utils nvidia-utils
 ```
 #### DarkarchWM required component
 ``` shell
-# run script
-bash language/install
-# gnome default dark
-gsettings get org.gnome.desktop.interface color-scheme
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-# disable plasma-wecom and avahi-daemon
-sudo dnf remove -y plasma-welcome
-sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.service
-```
-#### Install the input method
-``` shell
-sudo dnf install -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
-```
-#### DarkarchWM deployment
-``` shell
-sudo dnf install -y lxdm i3 i3blocks rofi ranger w3m w3m-img imlib2 code putty firefox feh
-cd /mnt/hgfs/DarkarchWM_fedora39/usr/share
-sudo cp -rf ./gtk-* /usr/share
-sudo cp -rf ./qt* /usr/share
-sudo cp -rf ./lxdm/themes/BlackArch /usr/share/lxdm/themes
-sudo cp ./rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes
-sudo cp ./X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d
-```
-#### DarkarchWM configuration restore
-``` shell
-cd etc
-sudo cp environment /etc/environment
-sudo cp lxdm/lxdm.conf /etc/lxdm
-sudo cp pam.d/lxdm /etc/pam.d
-sudo cp profile /etc
-sudo cp profile.d/offbeep.sh.bak /etc/profile.d
-sudo cp systemd/logind.conf /etc/systemd
+# gnome all black
+sudo gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && sudo gsettings get org.gnome.desktop.interface color-scheme
+# install fonts
+su root
+sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
+sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts && \
+# restore all configurations
+sudo cp -rf usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
+sudo cp -rf usr/share/gtk-* /usr/share && \
+sudo cp -rf usr/share/qt* /usr/share && \
+sudo cp -rf usr/share/lxdm/themes/BlackArch /usr/share/lxdm/themes && \
+sudo cp usr/share/rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes && \
+sudo cp usr/share/X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d && \
+sudo cp etc/environment /etc/environment && \
+sudo cp etc/lxdm/lxdm.conf /etc/lxdm && \
+sudo cp etc/pam.d/lxdm /etc/pam.d && \
+sudo cp etc/profile /etc && \
+sudo cp etc/profile.d/offbeep.sh.bak /etc/profile.d && \
+sudo cp etc/profile.d/append_path.sh /etc/profile.d && \
+sudo cp etc/systemd/logind.conf /etc/systemd && \
+mkinitcpio -p linux-lts && reboot
 ```
 #### DarkarchWM is loaded for testing
 ``` shell
@@ -205,24 +228,18 @@ sudo systemctl start lxdm.service
 ```
 ### Restore the admin user configuration
 ``` shell
-su alarm
-cd zsh/USER/config
-cp -rf ./* $HOME/.config
-sudo systemctl restart lxdm.service
+su C4ry
+yay -S docker docker-compose zerotier-one
+yay -S vmware-workstation vmware-keymaps
+su root
+mkinitcpio -p linux-lts
 ```
-#### Disable swap
+#### Install all applications(options)
 ``` shell
-sudo swapon --show
-sudo swapoff -a
-sudo systemctl stop swap.target && sudo systemctl disable swap.target
-sudo mv /usr/lib/systemd/system/swap.target /usr/lib/systemd/system/swap.target.bak
-```
-#### Default graphical startup
-``` shell
-sudo systemctl get-default 
-	# multi-user.target
-sudo systemctl set-default graphical.target # to switch grahical startup
-sudo systemctl enable lxdm.service
+yay -S wps-office-cn wps-office-mui-zh-cn wechat netease-cloud-music
+yay -S nvtop intel-gpu-tools obs-studio ollama-cuda notion-app-electron
+yay -S nmap wireshark-qt wireshark-cli reaver bully cowpatty macchanger hashcat hcxdumptool hcxtools
+yay -S pyrit pixiewps wifite john wireshark-cli ruby
 ```
 
 ## [➡ Back](/README.md)
