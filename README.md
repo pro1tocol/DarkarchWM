@@ -5,8 +5,8 @@
 ### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
 
 ## Instructions
-- ##### This theme can be built in archlinux
-- ##### The operating environment is extremely lightweight
+- ##### A lightweight GUI theme for Xorg
+- ##### This theme can be installed on Fedora/RHEL/CentOS
 
 ## Build the Environment
 
