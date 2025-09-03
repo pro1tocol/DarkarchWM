@@ -53,7 +53,7 @@ session.screen0.clickRaises:	true
 session.screen0.workspacewarpingvertical:	true
 session.screen0.noFocusWhileTypingDelay:	0
 session.screen0.focusSameHead:	false
-session.screen0.strftimeFormat:	[%a] %D %k:%M    
+session.screen0.strftimeFormat:	[%a] %D | %k:%M |
 session.screen0.maxDisableMove:	false
 session.screen0.focusModel:	ClickFocus
 session.screen0.defaultDeco:	NORMAL
