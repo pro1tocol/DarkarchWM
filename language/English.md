@@ -157,18 +157,19 @@ EDITOR=vim visudo
 %wheel ALL=(ALL: ALL) ALL
 # adjust path permissions
 sudo chown alarm:alarm -R /data
-cd /data/git/DarkarchWM_lts
-su C4ry
+cd /data/git/DarkarchWM_lts/zsh/USER
+su alarm
 cp inputrc /home/alarm/.inputrc
 cp nanorc /home/alarm/.nanorc
 cp vimrc /home/alarm/.vimrc
 cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
+exit
 ```
 ### Fix kernel mkinitcpio
 ``` shell
-cd /data/git/DarkarchWM_i3
+cd /data/git/DarkarchWM_lts
 su alarm
 cp -rf zsh/USER/cache/* $HOME/.cache/yay
 cd $HOME/.cache/yay
@@ -179,11 +180,12 @@ tar -xJvf upd72020x-fw.tar.xz && \
 tar -xJvf wd719x-firmware.tar.xz
 yay -S aic94xx-firmware ast-firmware mkinitcpio-firmware upd72020x-fw wd719x-firmware # install model
 yay -S fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime # install the input method
-su root
+exit
 mkinitcpio -p linux-lts # fix model
 ```
 ### Install tool nad graphics device
 ``` shell
+su alarm
 # intel
 yay -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel # run on the base
 
@@ -206,7 +208,6 @@ sudo gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && sud
 su root
 sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
 sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts && \
-# restore all configurations
 sudo cp -rf usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
 sudo cp -rf usr/share/gtk-* /usr/share && \
 sudo cp -rf usr/share/qt* /usr/share && \
@@ -228,9 +229,11 @@ sudo systemctl start lxdm.service
 ```
 ### Restore the admin user configuration
 ``` shell
-su C4ry
-yay -S docker docker-compose zerotier-one
-yay -S vmware-workstation vmware-keymaps
+su alarm
+cd /data/git/DarkarchWM_lts/zsh/USER/config
+cp -rf ./* $HOME/.config
+yay -S docker docker-compose vmware-keymaps
+yay -S vmware-workstation zerotier-one
 su root
 mkinitcpio -p linux-lts
 ```
@@ -240,6 +243,7 @@ yay -S wps-office-cn wps-office-mui-zh-cn wechat netease-cloud-music
 yay -S nvtop intel-gpu-tools obs-studio ollama-cuda notion-app-electron
 yay -S nmap wireshark-qt wireshark-cli reaver bully cowpatty macchanger hashcat hcxdumptool hcxtools
 yay -S pyrit pixiewps wifite john wireshark-cli ruby
+yay -S qt6ct-kde
 ```
 
 ## [➡ Back](/README.md)

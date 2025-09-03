@@ -20,4 +20,4 @@ picom --config $HOME/.config/picom/picom.conf &
 
 exec fluxbox
 # or if you want to keep a log:
-#exec fluxbox -log "/home/C4ry/.fluxbox/log"
+#exec fluxbox -log "$HOME/.fluxbox/log"
