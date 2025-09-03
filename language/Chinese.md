@@ -203,7 +203,8 @@ yay -S nvidia-lts nvidia-settings lib32-nvidia-utils nvidia-utils
 #### DarkarchWM图形化组件部署
 ``` shell
 # gnome全局深色
-sudo gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && sudo gsettings get org.gnome.desktop.interface color-scheme
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && \ 
+gsettings get org.gnome.desktop.interface color-scheme
 # 安装字体
 su root
 sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \

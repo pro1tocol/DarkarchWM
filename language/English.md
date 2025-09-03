@@ -203,7 +203,8 @@ yay -S nvidia-lts nvidia-settings lib32-nvidia-utils nvidia-utils
 #### DarkarchWM required component
 ``` shell
 # gnome all black
-sudo gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && sudo gsettings get org.gnome.desktop.interface color-scheme
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && \ 
+gsettings get org.gnome.desktop.interface color-scheme
 # install fonts
 su root
 sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
