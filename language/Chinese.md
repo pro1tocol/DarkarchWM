@@ -20,55 +20,98 @@
 | ./zsh/ROOT/*                  | /root/*                      | 对zsh/vim/nano的相关支持           | ⬜️       |
 | ./zsh/USER/*                  | ~/*                          | 对登录窗口管理器的用户提供配置支持 | &#9745; |
 
+## 安装在Archlinux
+### 建立系统存储
+``` shell
+parted /dev/nvme0n1
+mklabel gpt
+mkpart ESP 4096s 769M
+mkpart primary 769M -1
+set 1 boot on
+# 查看分区状态
+lsblk
+fdisk -l
+```
+### 格式化存储
+``` shell
+mkfs.fat -F32 /dev/nvme0n1p1
+```
+### 创建LVM分区并进行挂载
+``` shell
+pvcreate /dev/nvme0n1p2
+vgcreate linux /dev/nvme0n1p2
+lvcreate -l +100%FREE linux -n root
+# 格式化新建的lvm2分区
+mkfs.btrfs /dev/mapper/linux-root
+lvs # 查看lvm分区情况
+mount /dev/mapper/linux-root /mnt
+mkdir -p /mnt/boot
+mount /dev/nvme0n1p1 /mnt/boot
+df -h # 查看分区挂载情况
+```
 ## 系统初始化
-### 你需要在全新安装的系统环境下进行配置
+### 安装基础系统
 ``` shell
-sudo systemctl stop cockpit.socket && sudo systemctl disable cockpit.socket
-sudo systemctl stop cockpit.service && sudo systemctl disable cockpit.service # 禁用服务器网页前端
-sudo vim /etc/ssh/sshd_config # 配置远程连接参数
-sudo setenforce 0 # 临时关闭selinux
-sudo systemctl restart sshd # 重启远程ssh服务
+# 环境需要提前配置互联网络
+echo 'Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
+sudo pacman-key --init && sudo pacman-key --populate archlinux
+sudo pacman -Syy && sudo pacman -S archlinux-keyring
+pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode/amd-ucode # 测试部署
+bash language/Install
+genfstab -U /mnt > /mnt/etc/fstab # 将分区写入fstab
+cat /mnt/etc/fstab # 查看分区写入状态
 ```
-### 使用ssh协议连接服务器
+### 初始化配置
 ``` shell
-sudo vim /etc/selinux/config # 修改selinux参数
-	SELINUX=disable # 永久关闭selinux端口标准控制
-sudo systemctl stop firewalld.service && sudo systemctl disable firewalld.service # 禁用防火墙
+arch-chroot /mnt
+vim /etc/hostname # 修改主机名
+# 修改系统字体(激活中文)
+vim /etc/locale.gen
+    en_US.UTF-8 UTF-8
+    zh_CN.UTF-8 UTF-8
+# 将默认语言写入配置
+locale-gen
+echo 'LANG=en_US.UTF-8'  > /etc/locale.conf
+# 修复字体
+echo "KEYMAP=us" > /etc/vconsole.conf
+echo "FONT=lat9u-16" >> /etc/vconsole.conf
+mkinitcpio -P # 创建内核文件
 ```
-#### 卸载客户端不常用软件包
+#### 克隆项目
 ``` shell
-sudo dnf remove -y cockpit cockpit-system cockpit-bridge cockpit-packagekit systemd-resolved plymouth
-sudo touch /etc/resolv.conf && echo "nameserver 223.5.5.5" > /etc/resolv.conf
+mkdir -p /data/git && cd /data/git
+git clone -b lts --single-branch https://github.com/pro1tocol/DarkarchWM.git
+mv DarkarchWM DarkarchWM_lts && cd DarkarchWM_lts && pwd
 ```
-#### 将文件拷贝至$HOME(root)下
+#### 更新超级用户及更新内核文件(可选)
 ``` shell
-su root && whoami
+passwd root # 修改超级用户密码
 cd zsh/ROOT/
 sudo cp -rf ./* $HOME
 mv $HOME/inputrc $HOME/.inputrc
 mv $HOME/nanorc $HOME/.nanorc
 mv $HOME/vimrc $HOME/.vimrc
 mv $HOME/zshrc $HOME/.zshrc
-mv $HOME/vim $HOME/.vim
+echo $SHELL # 修改默认shell环境
+    # /bin/bash
+chsh -s /bin/zsh # 切换为zsh
+# 更新内核文件
+vim /etc/mkinitcpio.conf
+# ...
+	HOOKS=(base systemd udev autodetect microcode modconf kms keyboard keymap consolefont block lvm2 filesystems fsck)
+# ...
+mkinitcpio -p linux-lts # 更新
 ```
-#### 将文件拷贝至/etc/yum.repos.d路径下
+#### systemd-boot引导启动配置
 ``` shell
-cd etc/yum.repos.d
-sudo cp ./* /etc/yum.repos.d
-sudo dnf clean all && sudo dnf makecache # 更新包管理器源环境
-sudo dnf install -y openssl NetworkManager-tui
-```
-#### 切换$SHELL环境并更新系统
-``` shell
-sudo dnf install -y zsh zsh-autosuggestions zsh-syntax-highlighting.noarch && sudo chsh -s /bin/zsh
-sudo dnf update -y && reboot # 更新并重启系统
+bootctl status # 查看引导启动方式
+ls -l /boot # 查看Linux内核文件
+cat /etc/fstab # 查看分区(记录UUID)
 ```
 ### 切换systemd-boot引导环境
 ``` shell
-uname -srm && sudo dnf remove --oldinstallonly -y # 查看当前内核并卸载旧内核
-cd /boot/efi
-sudo dnf install -y systemd-boot-unsigned
-sudo bootctl install # 安装systemd-boot引导
+bootctl install
+cd /boot
 sudo vim loader/loader.conf # 编辑引导配置
 	default DarkarchWM.conf
 	timeout 3
@@ -76,129 +119,108 @@ sudo vim loader/loader.conf # 编辑引导配置
     editor no
 sudo vim loader/entries/DarkarchWM.conf
     title   DarkarchWM
-    linux   /vmlinuz-6.11.9-100.fc39.x86_64
-    initrd  /initramfs-6.11.9-100.fc39.x86_64.img
-	options /System.map-6.11.9-100.fc39.x86_64
-    options root=/dev/mapper/fedora-root ro rd.lvm.lv=fedora/root rhgb quiet
+    linux   /vmlinuz-linux-lts
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux-lts.img
+    options root=/dev/mapper/linux-root ro rd.lvm.lv=linux/root quiet
 sudo vim loader/entries/DarkarchWM-fallback.conf
     title   DarkarchWM(fallback)
-    linux   /vmlinuz-0-rescue-e2cc20db2f514b85babdae307d927ebf
-    initrd  /initramfs-0-rescue-e2cc20db2f514b85babdae307d927ebf.img
-    options /System.map-6.11.9-100.fc39.x86_64
-    options root=/dev/mapper/fedora-root ro rd.lvm.lv=fedora/root rhgb quiet
-sudo cp /boot/initramfs-* /boot/efi
-sudo cp /boot/vmlinuz-* /boot/efi
-sudo cp /boot/System.map-* /boot/efi
-sudo bootctl status # 查看引导状态
-sudo bootctl list # 查看引导列表
-reboot # 重启测试
+    linux   /vmlinuz-linux-lts
+    initrd  /intel-ucode.img
+    initrd  /initramfs-linux-lts-fallback.img
+    options root=/dev/mapper/linux-root ro rd.lvm.lv=linux/root quiet
+bootctl status
+bootctl list # 验证引导
+exit
+umount -R /mnt && reboot # 重启操作系统验证生效
 ```
 ---
-### 修改主机名及字体
+### 更新源及密钥
 ``` shell
-# 修改主机名
-vim /etc/hostname
-# 复制字体包路径
-cd /mnt/hgfs/DarkarchWM_fedora39
-sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts
-sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts
-# 复制默认SHELL字型
-sudo cp etc/vconsole.conf /etc
+# 添加archlinux镜像源
+vim /etc/pacman.conf
+    [multilib]
+    #Inclu...
+    [archlinuxcn]
+    Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+# 更新密钥
+pacman-key --init && pacman-key --populate archlinux
+pacman -Syy && pacman -Syu
+pacman -S archlinux-keyring archlinuxcn-keyring && pacman -S yay
 ```
-### 启用rpmfusion镜像源
+### 创建管理员用户
 ``` shell
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install -y https://mirrors.ustc.edu.cn/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-# 替换源地址(可选)
-sudo sed -e 's|^metalink=|#metalink=|g' \
-         -e 's|^#baseurl=http://download1.rpmfusion.org|baseurl=https://mirrors.ustc.edu.cn/rpmfusion|g' \
-         -i.bak \
-         /etc/yum.repos.d/rpmfusion*.repo
-sudo dnf clean all && sudo dnf makecache
-```
-### 建立管理员用户
-``` shell
-useradd -m -G wheel -s /bin/zsh alarm && passwd alarm
-cd /mnt/hgfs/DarkarchWM_fedora39/zsh/USER/
+useradd -m -G wheel -s /bin/zsh alarm # 创建用户
+passwd alarm
+# 修改权限
+EDITOR=vim visudo
+%wheel ALL=(ALL: ALL) ALL
+# 调整路径权限
+sudo chown alarm:alarm -R /data # 允许管理员用户调整项目
+cd /data/git/DarkarchWM_lts
+su C4ry
 cp inputrc /home/alarm/.inputrc
 cp nanorc /home/alarm/.nanorc
 cp vimrc /home/alarm/.vimrc
-cp -rf vim /home/alarm/.vim
 cp xprofile /home/alarm/.xprofile
 cp Xresources /home/alarm/.Xresources
 cp zshrc /home/alarm/.zshrc
+```
+### 修复内核模组
+``` shell
+cd /data/git/DarkarchWM_i3
 su alarm
-sudo chown alarm:alarm -R $HOME/.vim $HOME/.vimrc $HOME/.nanorc $HOME/.zshrc
-sudo chown alarm:alarm -R $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
+cp -rf zsh/USER/cache/* $HOME/.cache/yay
+cd $HOME/.cache/yay
+tar -xJvf aic94xx-firmware.tar.xz && \
+tar -xJvf ast-firmware.tar.xz && \
+tar -xJvf mkinitcpio-firmware.tar.xz && \
+tar -xJvf upd72020x-fw.tar.xz && \
+tar -xJvf wd719x-firmware.tar.xz
+yay -S aic94xx-firmware ast-firmware mkinitcpio-firmware upd72020x-fw wd719x-firmware # 安装模组
+yay -S fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime # 安装输入法
+su root
+mkinitcpio -p linux-lts # 修复模组
 ```
 #### 安装工具及显卡驱动
 ``` shell
-sudo dnf install wget git curl tar zip unzip gzip fastfetch btop iotop iftop nano -y
+# intel
+yay -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel # 默认驱动已保证基础运行
 
-# AMD核显设置(可选)
-sudo dnf install -y https://repo.radeon.com/amdgpu-install/6.4.3/rhel/9.6/amdgpu-install-6.4.60403-1.el9.noarch.rpm
-sudo vim /etc/yum.repos.d/amdgpu.repo
-	# 将$amdgpudistro修改为9.6
-sudo dnf makecache
-sudo dnf install -y python3-setuptools python3-wheel gcc tcl
-sudo usermod -a -G render,video $LOGNAME
-sudo dnf install -y rocm
-sudo usermod -aG render,video $USER
-	# 退出后重新登录用户使用groups查看分组信息
+# amd
+yay -S mesa lib32-mesa xf86-video-amdgpu vulkan-radeon  lib32-vulkan-radeon libva-mesa-driver
 
-# Nvidia独显设置
-echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf
-sudo dnf config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/fedora39/x86_64/cuda-fedora39.repo
-sudo dnf makecache
-sudo dnf install -y kernel-headers kernel-devel tar bzip2 make automake gcc gcc-c++ pciutils elfutils-libelf-devel libglvnd-opengl libglvnd-glx libglvnd-devel acpid pkgconfig dkms
-sudo dnf module list nvidia-driver # show all nvidia driver module
-sudo dnf module install nvidia-driver:latest-dkms # install driver
-sudo dracut --force
-sudo vim xorg.conf.d/10-nvidia.conf
-	Option "PrimaryGPU" "no" # the 3D driver setup
-cd /boot/efi
-sudo cp /boot/initramfs-* /boot/efi
-sudo cp /boot/vmlinuz-* /boot/efi
-sudo cp /boot/System.map-* /boot/efi
+# Nvidia-open
+yay -S nvidia-open-lts nvidia-settings lib32-nvidia-utils nvidia-utils
+# 禁用kms模组(可选)
+# sudo vim /etc/mkinitcpio.conf
 
-# Intel核显设置
-sudo dnf install -y intel-media-driver
-sudo lsmod | grep i915
+# Nvidia
+yay -S nvidia-lts nvidia-settings lib32-nvidia-utils nvidia-utils
 ```
-#### DarkarchWM必备组件部署
+#### DarkarchWM图形化组件部署
 ``` shell
-# 执行安装脚本
-bash language/install
 # gnome全局深色
-gsettings get org.gnome.desktop.interface color-scheme
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-# 禁用欢迎界面及avahi-daemon组件
-sudo dnf remove -y plasma-welcome
-sudo systemctl disable avahi-daemon.socket && sudo systemctl disable avahi-daemon.service
-```
-#### 安装输入法
-``` shell
-sudo dnf install -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
-```
-#### DarkarchWM部署
-``` shell
-sudo dnf install -y lxdm i3 i3blocks rofi ranger w3m w3m-img imlib2 code putty firefox feh
-cd /mnt/hgfs/DarkarchWM_fedora39/usr/share
-sudo cp -rf ./gtk-* /usr/share
-sudo cp -rf ./qt* /usr/share
-sudo cp -rf ./lxdm/themes/BlackArch /usr/share/lxdm/themes
-sudo cp ./rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes
-sudo cp ./X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d
-```
-#### DarkarchWM配置还原
-``` shell
-cd etc
-sudo cp environment /etc/environment
-sudo cp lxdm/lxdm.conf /etc/lxdm
-sudo cp pam.d/lxdm /etc/pam.d
-sudo cp profile /etc
-sudo cp profile.d/offbeep.sh.bak /etc/profile.d
-sudo cp systemd/logind.conf /etc/systemd
+sudo gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && sudo gsettings get org.gnome.desktop.interface color-scheme
+# 安装字体
+su root
+sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
+sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts && \
+# 还原全部配置
+sudo cp -rf usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
+sudo cp -rf usr/share/gtk-* /usr/share && \
+sudo cp -rf usr/share/qt* /usr/share && \
+sudo cp -rf usr/share/lxdm/themes/BlackArch /usr/share/lxdm/themes && \
+sudo cp usr/share/rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes && \
+sudo cp usr/share/X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d && \
+sudo cp etc/environment /etc/environment && \
+sudo cp etc/lxdm/lxdm.conf /etc/lxdm && \
+sudo cp etc/pam.d/lxdm /etc/pam.d && \
+sudo cp etc/profile /etc && \
+sudo cp etc/profile.d/offbeep.sh.bak /etc/profile.d && \
+sudo cp etc/profile.d/append_path.sh /etc/profile.d && \
+sudo cp etc/systemd/logind.conf /etc/systemd && \
+mkinitcpio -p linux-lts && reboot
 ```
 #### DarkarchWM首次载入测试
 ``` shell
@@ -207,24 +229,18 @@ sudo systemctl start lxdm.service
 ---
 ### 还原管理员用户配置
 ``` shell
-su alarm
-cd zsh/USER/config
-cp -rf ./* $HOME/.config
-sudo systemctl restart lxdm.service
+su C4ry
+yay -S docker docker-compose zerotier-one
+yay -S vmware-workstation vmware-keymaps
+su root
+mkinitcpio -p linux-lts
 ```
-#### 禁用交换分区
+#### 安装全部应用(可选)
 ``` shell
-sudo swapon --show
-sudo swapoff -a
-sudo systemctl stop swap.target && sudo systemctl disable swap.target
-sudo mv /usr/lib/systemd/system/swap.target /usr/lib/systemd/system/swap.target.bak
-```
-#### 默认图形化启动
-``` shell
-sudo systemctl get-default # 查看默认启动
-	# multi-user.target 默认命令启动模式
-sudo systemctl set-default graphical.target # 切换设置默认图形化启动
-sudo systemctl enable lxdm.service
+yay -S wps-office-cn wps-office-mui-zh-cn wechat netease-cloud-music
+yay -S nvtop intel-gpu-tools obs-studio ollama-cuda notion-app-electron
+yay -S nmap wireshark-qt wireshark-cli reaver bully cowpatty macchanger hashcat hcxdumptool hcxtools
+yay -S pyrit pixiewps wifite john wireshark-cli ruby
 ```
 
 ## [➡ 返回](/README.md)
