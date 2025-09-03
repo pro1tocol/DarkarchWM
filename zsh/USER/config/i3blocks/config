@@ -61,7 +61,7 @@ signal=1
 
 # User status
 [user]
-label=👽 
+label=👽
 command=echo "$(w | awk '/load average:/ {print $4,$5}' | grep -Eo '[0-9]') "
 interval=10
 
