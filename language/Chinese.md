@@ -99,7 +99,7 @@ reboot # 重启测试
 # 修改主机名
 vim /etc/hostname
 # 复制字体包路径
-cd /mnt/hgfs/DarkarchWM_fedora39
+cd ../DarkarchWM_fc39
 sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts
 sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts
 # 复制默认SHELL字型
@@ -119,7 +119,7 @@ sudo dnf clean all && sudo dnf makecache
 ### 建立管理员用户
 ``` shell
 useradd -m -G wheel -s /bin/zsh alarm && passwd alarm
-cd /mnt/hgfs/DarkarchWM_fedora39/zsh/USER/
+cd ../DarkarchWM_fc39/zsh/USER/
 cp inputrc /home/alarm/.inputrc
 cp nanorc /home/alarm/.nanorc
 cp vimrc /home/alarm/.vimrc
@@ -183,7 +183,7 @@ sudo dnf install -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
 #### DarkarchWM部署
 ``` shell
 sudo dnf install -y lxdm i3 i3blocks rofi ranger w3m w3m-img imlib2 code putty firefox feh
-cd /mnt/hgfs/DarkarchWM_fedora39/usr/share
+cd ../DarkarchWM_fc39/usr/share
 sudo cp -rf ./gtk-* /usr/share
 sudo cp -rf ./qt* /usr/share
 sudo cp -rf ./lxdm/themes/BlackArch /usr/share/lxdm/themes

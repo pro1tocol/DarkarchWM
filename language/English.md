@@ -99,7 +99,7 @@ reboot # test
 # modify the hostname
 vim /etc/hostname
 # copy the fonts
-cd /mnt/hgfs/DarkarchWM_fedora39
+cd ../DarkarchWM_fc39
 sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts
 sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts
 # copy the default SHELL font
@@ -119,7 +119,7 @@ sudo dnf clean all && sudo dnf makecache
 ### Create an admin user
 ``` shell
 useradd -m -G wheel -s /bin/zsh alarm && passwd alarm
-cd /mnt/hgfs/DarkarchWM_fedora39/zsh/USER/
+cd ../DarkarchWM_fc39/zsh/USER/
 cp inputrc /home/alarm/.inputrc
 cp nanorc /home/alarm/.nanorc
 cp vimrc /home/alarm/.vimrc
@@ -134,6 +134,7 @@ sudo chown alarm:alarm -R $HOME/.xprofile $HOME/.Xresources $HOME/.inputrc
 #### Installation tools and graphics card drivers
 ``` shell
 sudo dnf install wget git curl tar zip unzip gzip fastfetch btop iotop iftop nano -y
+
 # AMD graphics settings(options)
 sudo dnf install -y https://repo.radeon.com/amdgpu-install/6.4.3/rhel/9.6/amdgpu-install-6.4.60403-1.el9.noarch.rpm
 sudo vim /etc/yum.repos.d/amdgpu.repo
@@ -182,7 +183,7 @@ sudo dnf install -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
 #### DarkarchWM deployment
 ``` shell
 sudo dnf install -y lxdm i3 i3blocks rofi ranger w3m w3m-img imlib2 code putty firefox feh
-cd /mnt/hgfs/DarkarchWM_fedora39/usr/share
+cd ../DarkarchWM_fc39/usr/share
 sudo cp -rf ./gtk-* /usr/share
 sudo cp -rf ./qt* /usr/share
 sudo cp -rf ./lxdm/themes/BlackArch /usr/share/lxdm/themes
