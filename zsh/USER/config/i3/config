@@ -5,15 +5,14 @@
 # Application include
 include $HOME/.config/i3/app
 # Fonts setup
-font pango:MesloLGM Nerd Font Mono, Microsoft YaHei 12
 # Default key
 set $mod Mod1
 set $mod2 Mod4
 
 # hidden title
-font pango:DejaVu Sans Mono, Microsoft YaHei 12
+font pango:MesloLGM Nerd Font, Microsoft YaHei 8
 #font pango:SFMono Nerd Font Mono, Microsoft YaHei 18
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
 
 # Default Environment
 #exec --no-startup-id $HOME/.config/i3/sh/touchpad.sh
@@ -37,10 +36,10 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Setup System
-for_window [class="XTerm"] floating enable
-bindsym $mod+F1 exec xterm
+#for_window [class="XTerm"] floating enable
+#bindsym $mod+F1 exec xterm
+bindsym $mod+F1 exec kitty
 bindsym $mod+q kill
-#bindsym $mod2+d exec --no-startup-id dmenu_run -fn 'Microsoft YaHei-22' -l 15 -p "Run"
 bindsym $mod2+r exec --no-startup-id rofi -show run -theme DarkarchWM
 bindsym $mod2+d exec --no-startup-id rofi -show drun -theme DarkarchWM
 bindsym $mod2+q exec --no-startup-id $HOME/.config/i3/i3lock-color
@@ -114,28 +113,26 @@ bindsym $mod+e layout toggle split
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-		output primary
-        position top
-		# The fonts
-		font pango:MesloLGM Nerd Font Mono, Microsoft YaHei 14
-		#font pango:SFMono Nerd Font Mono, Microsoft YaHei 15
-		workspace_buttons yes
-		i3bar_command i3bar --transparency
-		status_command i3blocks
-		separator_symbol " "
-        colors {
-                background #00000000
-                statusline #6298e0FF
-                separator #6298e0FF
+#bar {
+		#output primary
+        #position top
+		#font pango:MesloLGM Nerd Font, Microsoft YaHei 12
+		#workspace_buttons yes
+		#i3bar_command i3bar --transparency
+		#status_command i3blocks
+		#separator_symbol " "
+        #colors {
+                #background #00000000
+                #statusline #6298e0FF
+                #separator #6298e0FF
                 
-                focused_workspace #6298e0FF #00000000 #6298e0FF #00000000
-                active_workspace #00000000 #6298e0FF #00000000 #6298e0FF
-                inactive_workspace #00000000 #6298e0FF #00000000 #6298e0FF
-                urgent_workspace #6298e0FF #00000000 #6298e0FF #00000000
-                binding_mode #6298e0FF #00000000 #6298e0FF #00000000
-        }
-}
+                #focused_workspace #6298e0FF #00000000 #6298e0FF #00000000
+                #active_workspace #00000000 #6298e0FF #00000000 #6298e0FF
+                #inactive_workspace #00000000 #6298e0FF #00000000 #6298e0FF
+                #urgent_workspace #6298e0FF #00000000 #6298e0FF #00000000
+                #binding_mode #6298e0FF #00000000 #6298e0FF #00000000
+        #}
+#}
 
 # Setup picom
 exec_always picom -b
@@ -143,9 +140,12 @@ exec_always picom -b
 # Setup background
 exec_always --no-startup-id feh --randomize --bg-fill $HOME/.config/i3/wallpaper.jpg
 
+# polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 # default gaps
-gaps inner 5
-gaps outer 5
+gaps inner 10
+gaps outer 2
 
 # gaps
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft

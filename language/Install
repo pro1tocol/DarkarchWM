@@ -7,8 +7,8 @@ pacstrap /mnt lvm2 efibootmgr less bc fzf bluez bluez-utils bluedevil bluez-obex
 pacstrap /mnt ntfs-3g usbutils xorg-xbacklight xorg-xrdb xorg-xkbcomp xorg-xmodmap xorg-xdpyinfo && \
 pacstrap /mnt sof-firmware xf86-input-synaptics xf86-input-evdev xf86-input-void && \
 pacstrap /mnt alsa-utils pipewire-pulse brightnessctl xdotool acpi sysstat tk gnuplot && \
-pacstrap /mnt xterm dolphin gwenview mpv plasma-pa plasma-nm plasma-thunderbolt && \
+pacstrap /mnt xterm kitty dolphin gwenview mpv plasma-pa plasma-nm plasma-thunderbolt && \
 pacstrap /mnt breeze-gtk breeze-plymouth systemsettings kscreen powerdevil gnome-screenshot gnome-calculator && \
-pacstrap /mnt fastfetch kde-gtk-config qt5ct qt6ct breeze breeze-icons && \
+pacstrap /mnt fastfetch polybar kde-gtk-config qt5ct qt6ct breeze breeze-icons && \
 pacstrap /mnt picom screenkey slop libappindicator-gtk3 lxdm i3-wm i3blocks rofi ranger w3m && \
 pacstrap /mnt imlib2 vscode putty firefox feh imagemagick jpegexiforient vim-molokai xfsprogs
