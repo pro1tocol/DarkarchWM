@@ -7,7 +7,7 @@ sudo dnf install -y xinput libXxf86vm alsa-utils xorg-x11-drv-synaptics-devel &&
 sudo dnf install -y xrdb brightnessctl xdotool acpi sysstat tk gnuplot lm_sensors libatomic && \
 sudo dnf install -y plasma-breeze kde-style-breeze breeze-icon-theme breeze-icon-theme-devel breeze-gtk.noarch && \
 sudo dnf install -y breeze-gtk-common.noarch breeze-gtk-gtk2.noarch breeze-gtk-gtk3.noarch breeze-gtk-gtk4.noarch breeze-gtk-gtk4.noarch breeze-cursor-theme.noarch && \
-sudo dnf install -y xterm dolphin gwenview mpv plasma-desktop plasma-pa plasma-nm plasma-thunderbolt && \
+sudo dnf install -y xterm kitty polybar dolphin gwenview mpv plasma-desktop plasma-pa plasma-nm plasma-thunderbolt && \
 sudo dnf install -y kscreen powerdevil gnome-screenshot gnome-calculator && \
 sudo dnf install -y kde-gtk-config qt5ct qt6ct adwaita-qt5 adwaita-qt6 && \
 sudo dnf install -y bc fzf less picom screenkey slop libappindicator-gtk3
