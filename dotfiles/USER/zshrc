@@ -78,6 +78,7 @@ fi
 alias ll='ls -lF --color=auto -lAF'
 alias l='ls -l --color=auto'
 alias ls='ls --color=auto'
+alias cls='clear'
 alias netr="netstat -rn"
 alias netp="netstat -ant | grep LISTEN"
 alias netu="netstat -anut | grep udp"
