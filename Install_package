@@ -1,0 +1,13 @@
+#!/bin/bash
+
+xbps-install -u -y vim nano curl git gzip unzip zip tar iftop btop && \
+xbps-install -u -y NetworkManager dhcpcd iwd openssh openssl net-tools && \
+xbps-install -u -y lvm2 efibootmgr less bc fzf bluez bluedevil bluez-obex && \
+xbps-install -u -y ntfs-3g usbutils xbacklight xrdb xkbcomp xmodmap xdpyinfo && \
+xbps-install -u -y sof-firmware xf86-input-synaptics xf86-input-evdev && \
+xbps-install -u -y alsa-utils pipewire brightnessctl xdotool acpi sysstat tk gnuplot && \
+xbps-install -u -y xterm kitty dolphin gwenview mpv plasma-pa plasma-nm plasma-thunderbolt && \
+xbps-install -u -y breeze-gtk breeze-plymouth systemsettings kscreen powerdevil gnome-screenshot gnome-calculator && \
+xbps-install -u -y fastfetch kde-gtk-config qt5ct qt6ct breeze breeze-icons polybar && \
+xbps-install -u -y picom screenkey slop lxdm i3 rofi ranger w3m && \
+xbps-install -u -y imlib2 vscode putty firefox feh xfsprogs xinit xorg
