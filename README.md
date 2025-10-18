@@ -1,8 +1,6 @@
 ![image](./png/DarkarchWM.png)
 
-# <p align="center"> standard </p>
-
-### <p align="center"> Language(Option): [中文](./language/Chinese.md) </p>
+### <p align="center"> Option language: [中文](./language/Chinese.md) </p>
 
 ## Instructions
 - ##### A lightweight GUI theme for Xorg
