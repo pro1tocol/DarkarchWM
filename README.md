@@ -1,8 +1,8 @@
 ![image](./png/DarkarchWM.png)
 
-# <p align="center"> on Archlinux-lts kernel </p>
+# <p align="center"> standard </p>
 
-### <p align="center"> Installation: [English](./language/English.md) | [中文](./language/Chinese.md) </p>
+### <p align="center"> Language(Option): [中文](./language/Chinese.md) </p>
 
 ## Instructions
 - ##### A lightweight GUI theme for Xorg
@@ -25,9 +25,9 @@
   | Bluetooth | bluez                | bluetoothctl                                                                                      |
   | Light     | brightnessctl        | libinput                                                                                  |
 
-## See
+## See(Option)
 
-![image](./png/firefox.png)
+![image]()
 
 ## Support
 - ##### Brightness adjustment
