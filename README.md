@@ -2,7 +2,7 @@
 
 ### <p align="right"> Option: [中文](./language/Chinese.md) </p>
 
-- ##### A simple and efficient desktop environment
+- ##### <p align="right"> A simple and efficient desktop environment </p>
 
 ## Build the Environment
 
@@ -36,7 +36,7 @@
 
 ## Installation
 ### Basic system(Based on void linux)
-#### check [Install default system](Install default system)
+#### check [https://voidlinux.org/](https://voidlinux.org/)
 #### Connet setup
 ``` bash
 # Manually network
