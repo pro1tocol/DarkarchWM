@@ -1,7 +1,7 @@
 
-![image](./png/DarkarchWM.png)
+![image](/png/DarkarchWM.png)
 
-### <p align="right"> Option: [English](README.md) </p>
+### <p align="right"> Option: [English](/README.md) </p>
 
 ##### <p align="right"> 一个简单高效的桌面环境 </p>
 
@@ -24,7 +24,7 @@
 
 ## 预览
 
-![image](png/firefox.png)
+![image](/png/firefox.png)
 
 ## 支持
 - ##### 屏幕背光调节
