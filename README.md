@@ -2,37 +2,94 @@
 
 ### <p align="right"> Option: [中文](./language/Chinese.md) </p>
 
-## Instructions
-- ##### A lightweight GUI theme for Xorg
-- ##### This theme can be installed on Archlinux
+- ##### A simple and efficient desktop environment
 
 ## Build the Environment
 
-  | Standards | x86_64/arm           | Dependence                                                                                        |
+  | Standards | x86_64           | Dependence                                                                                        |
   | :--- | :--- | :--- |
-  | Kernel    | linux 6.12           | systemd/lvm                                                                                       |
-  | Lander    | lxdm                 | gtk3/breeze-gtk                                                                                  |
-  | Manager   | i3/i3-blocks/i3lock-color              | gtk/gtk2/gtk3/gtk4/qt5ct/qt6ct                                                                    |
-  | Displays  | X11                  | picom/rofi/amdgpu-dkms                                                                      |
-  | Shell     | xterm                | bash/zsh/zsh-completions/zsh-syntax-highlighting/zsh-autosuggestions |
-  | Files     | ranger/dolphin       | w3m/w3m-img/breeze-gtk                                                                       |
-  | Fonts     | Microsoft/MesloLGMNerdFontMono | google-noto/SansMono/others                                                                                            |
-  | Text      | vim/nano/code        | vim-molokai                                                                                       |
-  | Input     | fcitx5               | simple-dark/fcitx5/fcitx5-qt/fcitx5-gtk/fcitx5-rime/xinput                  |
-  | Sound     | alsa-utils             | libXxf86vm                                                                             |
+  | Kernel    | linux 6.6           | runit                                                                                       |
+  | Lander    | lxdm                 | breeze-dark                                                                                  |
+  | Manager   | i3              | gtk/qt                                                                    |
+  | Displays  | Xorg                  | picom/rofi/polybar                                                                      |
+  | Shell     | kitty                | bash/zsh |
+  | Files     | dolphin       | xfs                                                                       |
+  | Fonts     | Microsoft/Meslo | copy                                                                                            |
+  | Text      | vim        | vim-molokai                                                                                       |
+  | Input     | fcitx5               | simple-dark                  |
+  | Sound     | pulseaudio             | xf86audio                                                                             |
   | Bluetooth | bluez                | bluetoothctl                                                                                      |
-  | Light     | brightnessctl        | libinput                                                                                  |
+  | Light     | bright        | libinput                                                                                  |
 
 ## See(Option)
 
-![image]()
+![image](png/firefox.png)
 
 ## Support
-- ##### Brightness adjustment
-- ##### Volume adjustment
+- ##### Bright
+- ##### Volume
 - ##### Touchpad
-- ##### Window indicator
-- ##### Program Launcher
+- ##### Indicator
+- ##### Launcher
+
+---
+
+## Installation
+### Basic system(Based on void linux)
+#### check [Install default system](Install default system)
+#### Connet setup
+``` bash
+# Manually network
+ip addr add 192.168.1.2/24 dev eth0
+ip route add default via 192.168.1.2 dev eth0
+echo 'nameserver 114.114.114.114' > /etc/resolv.conf
+# You need check network
+ping mirror.sjtu.edu.cn
+# Configure remote and run service
+vi /etc/ssh/sshd_config
+sv status sshd
+sv restart sshd
+```
+#### Install some tools on basic system
+``` bash
+# Change mirrors sources
+mkdir -p /etc/xbps.d
+cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://repo-default.voidlinux.org|https://mirror.sjtu.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
+xbps-install -S && xbps-install -u xbps 
+# Install tools
+xbps-install -u vim fastfetch btop tzdata parted libstdc++-14.2.1+20250405_2
+# You can search some tools in this command
+# xbps-query -Rs nano
+```
+#### Create file system on storage
+``` bash
+# Create partition
+parted /dev/nvme0n1
+mklabel gpt
+mkpart ESP 4096s 769M
+mkpart primary 769M -1
+set 1 boot on
+p
+# "q" to quit
+# Format the boot
+mkfs.fat -F 32 /dev/nvme0n1p1
+# Format the file system and mount
+pvcreate /dev/nvme0n1p2
+vgcreate DarkarchWM /dev/nvme0n1p2
+lvcreate -l +100%FREE DarkarchWM -n system
+# Format the new LVM2 partition
+mkfs.xfs /dev/mapper/DarkarchWM-system
+# Mount file system
+mount /dev/mapper/DarkarchWM-system /mnt
+mount --mkdir /dev/nvme0n1p1 /mnt/boot
+# Check the LVM partition status
+lvs 
+df -h
+```
+#### Install basic system
+
+---
 
 ## Shortcut keys
 
@@ -43,13 +100,6 @@
 # k : up
 # l : right
 ```
-##### Example
-``` bash
-# Win + Shift + 2 : move window to workspace 2
-# Alt + l : move window to right
-# Win + f : resize window to bigger
-```
-
 #### The "Alt" Keys
 ``` bash
 # Alt + F1 :open terminal
@@ -75,4 +125,11 @@
 # Win + Shift + 1 : take window to workspace 1
 # Win + Shift + 2 : take window to workspace 2
 # Win + Shift + 3 : take window to workspace 3
+```
+
+##### Example
+``` bash
+# Win + Shift + 2 : move window to workspace 2
+# Alt + l : move window to right
+# Win + f : resize window to bigger
 ```
