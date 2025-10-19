@@ -232,24 +232,24 @@ xbps-reconfigure -fa
 #### After entering DarkarchWM
 #### Fix related functions
 ``` bash
-# fix backlight
+# Fix backlight
 sudo xbps-install -S brightnessctl
 brightnessctl
 su alarm
-groups  # check video
+groups  # Check video
 sudo usermod -aG video $USER
 reboot
-# fix battery
+# Fix battery
 ls -1 /sys/class/power_supply/
 vim $HOME/.config/polybar/config.ini
-# fix volume
+# Fix volume
 xbps-install -u pulseaudio
-# fix networks
+# Fix networks
 ip addr # record name
 vim $HOME/.config/polybar/config.ini # wirte interface
-# fix firmware
+# Fix firmware
 sudo xbps-install -u linux-firmware
-# fix datetime
+# Fix time zone
 ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```
@@ -269,16 +269,16 @@ hwclock --systohc
 ```
 #### The "Alt" Keys
 ``` bash
-# Alt + F1 :open terminal
-# Alt + q :close window
-# Alt + p :open screenkey
-# Alt + c :open vscode
-# Alt + f :open firefox
-# Alt + s :open gsettings
-# Alt + Shift + r :restart window manager
-# Alt + Shift + q :exit window manager
-# Alt + mouse_left :move window
-# Alt + mouse_right :resize window
+# Alt + F1 : open terminal
+# Alt + q : close window
+# Alt + p : open screenkey
+# Alt + c : open vscode
+# Alt + f : open firefox
+# Alt + s : open gsettings
+# Alt + Shift + r : restart window manager
+# Alt + Shift + q : exit window manager
+# Alt + mouse_left : move window
+# Alt + mouse_right : resize window
 ```
 
 #### The "WIn/Option" Keys

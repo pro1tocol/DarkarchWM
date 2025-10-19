@@ -87,47 +87,47 @@ mount --mkdir /dev/nvme0n1p1 /mnt/boot
 lvs 
 df -h
 ```
-#### Install basic system
+#### 安装默认系统
 ``` bash
 xbps-install -Sy -R https://mirror.sjtu.edu.cn/voidlinux/current -r /mnt base-system
 ```
-##### Chroot to system and setup
+##### 切换到系统环境并进行设置
 ``` bash
-# Generate List
+# 生成列表
 xgenfstab -U /mnt > /mnt/etc/fstab && cat /mnt/etc/fstab
 xchroot /mnt /bin/bash
-# Change mirrors sources again
+# 再次切换软件包镜像源
 mkdir -p /etc/xbps.d
 cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
 sed -i 's|https://repo-default.voidlinux.org|https://mirror.sjtu.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
 xbps-install -Su && xbps-install -u -y zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting wget git
-# Download this repository
+# 下载这个仓库
 mkdir -p /data/git && cd /data/git
 git clone https://github.com/pro1tocol/DarkarchWM.git && cd DarkarchWM
-# Run this script
+# 运行这个软件包脚本
 chmod +x Install_package && bash Install_package
 ```
-##### System init
+##### 系统初始化
 ``` bash
-vim /etc/hostname # You need change hostname
-vim /etc/default/libc-locales # You need set language
+vim /etc/hostname # 你需要切换主机名
+vim /etc/default/libc-locales # 你需要设置语言
 xbps-reconfigure -f glibc-locales
-# Set system display font
+# 设置显示字体
 echo "KEYMAP=us" > /etc/vconsole.conf && echo "FONT=lat9u-16" >> /etc/vconsole.conf
-# Create a user and grant permission
+# 创建用户并赋予权限
 useradd -m -G wheel -s /bin/zsh alarm
 EDITOR=vim visudo
 ```
-##### Switch standard kernel
+##### 切换标准内核
 ``` bash
 xbps-query -Rs linux-lts
 xbps-install -u -y linux-lts-6.6_1 linux-lts-headers-6.6_1
 ```
-##### Setup system boot
+##### 设置系统引导
 ``` bash
 xbps-install -u -y systemd-boot
-ls -l /boot # View linux kernel
-cat /etc/fstab # View partition UUID
+ls -l /boot # 查看linux内核
+cat /etc/fstab # 查看分区 UUID
 bootctl install
 cd /boot
   echo 'default DarkarchWM.conf' > loader/loader.conf
@@ -140,7 +140,7 @@ cat loader/loader.conf
   echo 'initrd  /initramfs-6.6.111_1.img' >> loader/entries/DarkarchWM.conf
   echo 'options root=/dev/mapper/DarkarchWM-system ro rd.lvm.lv=DarkarchWM/system quiet' >> loader/entries/DarkarchWM.conf
 cat loader/entries/DarkarchWM.conf
-bootctl status # Check boot effective
+bootctl status # 检查启动有效性
 ```
 ##### Change repository permission and restore root dotfiles
 ``` bash
@@ -151,46 +151,46 @@ mv $HOME/nanorc $HOME/.nanorc
 mv $HOME/vim $HOME/.vim
 mv $HOME/vimrc $HOME/.vimrc
 mv $HOME/zshrc $HOME/.zshrc
-# Configure remote again
+# 再次配置远程连接服务
 vim /etc/ssh/sshd_config
 ```
-##### Run tools at system startup
+##### 在系统启动时运行的工具
 ``` bash
 echo 'nameserver 114.114.114.114' > /etc/resolv.conf
 ln -s /etc/sv/dbus /etc/runit/runsvdir/default/dbus
 ln -s /etc/sv/NetworkManager /etc/runit/runsvdir/default/NetworkManager
 ln -s /etc/sv/bluetoothd /etc/runit/runsvdir/default/bluetoothd
 ln -s /etc/sv/sshd /etc/runit/runsvdir/default/sshd
-# virtual machine vmware tools
+# 虚拟主机vmware工具
 ln -s /etc/sv/vmtoolsd /etc/runit/runsvdir/default/vmtoolsd
 ln -s /etc/sv/vmware-vmblock-fuse /etc/runit/runsvdir/default/vmware-vmblock-fuse
 ```
-#### All done and restart the system
+#### 全部完成并重启系统
 ``` bash
 chsh -s /bin/zsh
-# Application system font
+# 应用系统字体
 xbps-reconfigure -fa
-# Set Password
+# 设置密码
 passwd root
 passwd alarm
-# Quit and reboot
+# 退出并重启
 exit
 umount -R /mnt
 shutdown -r now
 ```
 ---
 
-### Graphical_settings
-#### User configuration
+### 图形化设置
+#### 用户配置
 ``` bash
-# Enter the system after reboot
-# Uninstall kernel
+# 在重启进入系统前
+# 卸载内核
 rm -v /boot/loader/entries/void-*
 rm -v /boot/config-6.12.53_1
 rm -v /boot/initramfs-6.12.53_1.img
 rm -v /boot/vmlinuz-6.12.53_1
-reboot # again
-# Enter user configuration
+reboot # 再次运行
+# 进入用户设置
 su alarm
 cd /data/git/DarkarchWM/dotfiles/USER
 cp inputrc $HOME/.inputrc
@@ -217,12 +217,12 @@ sudo cp system/etc/lxdm/lxdm.conf /etc/lxdm && \
 sudo cp system/etc/pam.d/lxdm /etc/pam.d && \
 sudo cp -r system/usr/share/themes/Breeze-Dark /usr/share/themes
 ```
-#### DarkarchWM First run
+#### DarkarchWM 首次运行
 ``` bash
 su root
 ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
 ```
-#### Continue user configuration
+#### 继续用户设置
 ``` bash
 su alarm
 cd /data/git/DarkarchWM/dotfiles/USER/config
@@ -230,74 +230,74 @@ cp -rf ./* $HOME/.config
 exit
 xbps-reconfigure -fa
 ```
-#### After entering DarkarchWM
-#### Fix related functions
+#### 再次进入 DarkarchWM 前
+#### 修复相关功能
 ``` bash
-# fix backlight
+# 修复背光调节
 sudo xbps-install -S brightnessctl
 brightnessctl
 su alarm
-groups  # check video
+groups  # 确认包含video组
 sudo usermod -aG video $USER
 reboot
-# fix battery
+# 修复电池显示
 ls -1 /sys/class/power_supply/
 vim $HOME/.config/polybar/config.ini
-# fix volume
+# 修复声音调节
 xbps-install -u pulseaudio
-# fix networks
-ip addr # record name
-vim $HOME/.config/polybar/config.ini # wirte interface
-# fix firmware
+# 修复网络显示
+ip addr # 记录名字
+vim $HOME/.config/polybar/config.ini # 写入设备名
+# 修复linux固件
 sudo xbps-install -u linux-firmware
-# fix datetime
+# 修复时区
 ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```
-### Installation complete
-#### Below are the system shortcut keys
+### 安装完成
+#### 以下是快捷键
 
 ---
 
-## Keys
+## 键位
 
-#### The "Move" keys
+#### "移动" 键位
 ``` bash
-# h : left
-# j : down
-# k : up
-# l : right
+# h : 向左
+# j : 向下
+# k : 向上
+# l : 向右
 ```
-#### The "Alt" Keys
+#### "替代" 键位
 ``` bash
-# Alt + F1 :open terminal
-# Alt + q :close window
-# Alt + p :open screenkey
-# Alt + c :open vscode
-# Alt + f :open firefox
-# Alt + s :open gsettings
-# Alt + Shift + r :restart window manager
-# Alt + Shift + q :exit window manager
-# Alt + mouse_left :move window
-# Alt + mouse_right :resize window
-```
-
-#### The "WIn/Option" Keys
-``` bash
-# Win + r : run command
-# Win + d : run desktop application
-# Win + q : window to lock
-# Win + 1 : to workspace 1
-# Win + 2 : to workspace 2
-# Win + 3 : to workspace 3
-# Win + Shift + 1 : take window to workspace 1
-# Win + Shift + 2 : take window to workspace 2
-# Win + Shift + 3 : take window to workspace 3
+# Alt + F1 : 打开终端
+# Alt + q : 关闭窗口
+# Alt + p : 打开屏幕键位
+# Alt + c : 打开代码编辑器
+# Alt + f : 打开火狐浏览器
+# Alt + s : 打开设置
+# Alt + Shift + r : 刷新窗口
+# Alt + Shift + q : 退出窗口管理器
+# Alt + mouse_left : 移动窗口
+# Alt + mouse_right : 调节窗口大小
 ```
 
-##### Example
+#### "可选" 键位
 ``` bash
-# Win + Shift + 2 : move window to workspace 2
-# Alt + Shift + l : move window to right
-# Win + f : resize window to bigger
+# Win + r : 运行命令选择器
+# Win + d : 运行程序选择器
+# Win + q : 锁定
+# Win + 1 : 前往工作区 1
+# Win + 2 : 前往工作区 2
+# Win + 3 : 前往工作区 3
+# Win + Shift + 1 : 窗口移动到工作区 1
+# Win + Shift + 2 : 窗口移动到工作区 2
+# Win + Shift + 3 : 窗口移动到工作区 3
+```
+
+##### 示例
+``` bash
+# Win + Shift + 2 : 窗口移动到工作区 2
+# Alt + Shift + l : 向右移动窗口
+# Win + f : 全屏窗口
 ```
