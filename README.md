@@ -1,6 +1,6 @@
 ![image](./png/DarkarchWM.png)
 
-### <p align="right"> Option: [中文](./language/Chinese.md) </p>
+### <p align="right"> Option: [中文](language/Chinese.md) </p>
 
 ##### <p align="right"> A simple and efficient desktop environment </p>
 
@@ -21,7 +21,7 @@
   | Bluetooth | bluez                | bluetoothctl                                                                                      |
   | Light     | bright        | libinput                                                                                  |
 
-## See(Option)
+## See
 
 ![image](png/firefox.png)
 
@@ -297,6 +297,6 @@ hwclock --systohc
 ##### Example
 ``` bash
 # Win + Shift + 2 : move window to workspace 2
-# Alt + l : move window to right
+# Alt + Shift + l : move window to right
 # Win + f : resize window to bigger
 ```
