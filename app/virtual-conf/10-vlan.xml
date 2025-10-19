@@ -1,0 +1,10 @@
+<network>
+  <name>vlan10</name>
+  <forward mode='nat'/>
+  <bridge name='vlan10' stp='on' delay='0'/>
+  <ip address='10.21.0.14' netmask='255.255.255.240'>
+    <dhcp>
+      <range start='10.21.0.1' end='10.21.0.13'/>
+    </dhcp>
+  </ip>
+</network>
