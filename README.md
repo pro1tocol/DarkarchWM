@@ -256,7 +256,6 @@ sudo udevadm control --reload
 sudo udevadm trigger --subsystem-match=sound
 xinput list-props <number> # check device event number
 sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf # change conf
-sudo vim /usr/share/X11/xorg.conf.d/41-libinput.conf # change conf
 ls -l /dev/snd/ # check devices
 sudo cp -rf app/volume/udev-trigger-sound /etc/sv
 sudo chmod +x /etc/sv/udev-trigger-sound/run
