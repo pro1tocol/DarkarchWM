@@ -184,6 +184,7 @@ shutdown -r now
 ``` bash
 # Enter the system after reboot
 # Uninstall kernel
+xbps-remove -R linux linux-headers
 rm -v /boot/loader/entries/void-*
 rm -v /boot/config-6.12.53_1
 rm -v /boot/initramfs-6.12.53_1.img
@@ -197,8 +198,9 @@ cp nanorc $HOME/.nanorc
 cp -r vim $HOME/.vim
 cp vimrc $HOME/.vimrc
 cp xprofile $HOME/.xprofile
+cp Xresources $HOME/.Xresources
 cp zshrc $HOME/.zshrc
-sudo xbps-install -u -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
+sudo xbps-install -u -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime fcitx5-gtk+2 fcitx5-gtk+3 fcitx5-gtk-devel fcitx5-gtk4 fcitx5-qt fcitx5-qt5 fcitx5-qt6
 cd /data/git/DarkarchWM
 sudo cp -rf system/usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
 sudo cp -rf system/usr/share/fonts/Meslo /usr/share/fonts && \
@@ -234,22 +236,41 @@ xbps-reconfigure -fa
 ``` bash
 # Fix backlight
 sudo xbps-install -S brightnessctl
-brightnessctl
+brightnessctl # record name
 su alarm
-groups  # Check video
+groups  # check video
 sudo usermod -aG video $USER
+vim $HOME/.config/polybar/config.ini
 reboot
-# Fix battery
+
+# fix battery
 ls -1 /sys/class/power_supply/
 vim $HOME/.config/polybar/config.ini
-# Fix volume
+
+# fix volume
 xbps-install -u pulseaudio
-# Fix networks
+sudo usermod -aG audio $(whoami)
+mkdir -p /etc/udev/rules.d
+sudo cp app/volume/91-pulseaudio-snd.rules /etc/udev/rules.d
+sudo udevadm control --reload
+sudo udevadm trigger --subsystem-match=sound
+xinput list-props <number> # check device event number
+sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf # change conf
+sudo vim /usr/share/X11/xorg.conf.d/41-libinput.conf # change conf
+ls -l /dev/snd/ # check devices
+sudo cp -rf app/volume/udev-trigger-sound /etc/sv
+sudo chmod +x /etc/sv/udev-trigger-sound/run
+sudo ln -s /etc/sv/udev-trigger-sound /etc/runit/runsvdir/default
+sudo reboot
+
+# fix networks
 ip addr # record name
-vim $HOME/.config/polybar/config.ini # wirte interface
-# Fix firmware
+vim $HOME/.config/polybar/config.ini
+
+# fix firmware
 sudo xbps-install -u linux-firmware
-# Fix time zone
+
+# fix timezone
 ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```

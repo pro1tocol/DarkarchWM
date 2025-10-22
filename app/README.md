@@ -1,4 +1,50 @@
 # Applications
+### i3lock-colors
+``` bash
+git clone https://github.com/Raymo111/i3lock-color.git && cd i3lock-color
+sudo chmod +x i3lock-devel && bash i3lock-devel
+./build.sh
+./install-i3lock-color.sh
+```
+
+---
+
+### Container applications
+``` bash
+su alarm
+sudo xbps-install -u docker docker-compose
+sudo mkdir -p /etc/docker
+vim /etc/docker/daemon.json
+ln -s /etc/sv/containerd  /etc/runit/runsvdir/default/containerd
+ln -s /etc/sv/docker /etc/runit/runsvdir/default/docker
+sv status containerd
+sv status docker
+```
+
+---
+
+### Flatpak desktop applications
+``` bash
+su alarm
+sudo xbps-install -u -y flatpak
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
+flatpak remotes --show-details # show
+flatpak list # show already install
+
+# Install wechat
+flatpak install -y com.tencent.WeChat
+# Application file path： $HOME/.var/app/com.tencent.WeChat/xwechat_files
+
+# Install wps-office
+flatpak install -y com.wps.Office
+
+# Install cloudmusic
+flatpak install -y com.github.gmg137.netease-cloud-music-gtk
+```
+
+---
+
 ### Virtual environment install
 ``` bash
 su root
@@ -42,26 +88,4 @@ sudo virsh net-dhcp-leases vlan10 # connected via DHCP under the virtual network
 ``` bash
 # the system ISO files path: " /var/lib/libvirt/images "
 # https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/
-```
-
----
-
-### Flatpak desktop applications
-``` bash
-su alarm
-sudo xbps-install -u -y flatpak
-flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
-flatpak remotes --show-details # show
-flatpak list # show already install
-
-# Install wechat
-flatpak install -y com.tencent.WeChat
-# Application file path： $HOME/.var/app/com.tencent.WeChat/xwechat_files
-
-# Install wps-office
-flatpak install -y com.wps.Office
-
-# Install cloudmusic
-flatpak install -y com.github.gmg137.netease-cloud-music-gtk
 ```

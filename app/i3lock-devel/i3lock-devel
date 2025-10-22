@@ -1,0 +1,16 @@
+#!/bin/bash
+sudo xbps-install -S \\
+     libxcb-devel \\
+     xcb-util-devel \\
+     xcb-util-wm-devel \\
+     xcb-util-xrm-devel \\
+     xcb-util-keysyms-devel \\
+     xcb-util-image-devel \\
+     xcb-util-renderutil-devel \\
+     libev-devel \\
+     libxkbcommon-devel \\
+     libxkbcommon-x11 \\
+     cairo-devel \\
+     libjpeg-turbo-devel \\
+     giflib-devel \\
+     pam-devel
