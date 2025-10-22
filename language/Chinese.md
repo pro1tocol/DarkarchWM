@@ -185,6 +185,7 @@ shutdown -r now
 ``` bash
 # 在重启进入系统前
 # 卸载内核
+xbps-remove -R linux linux-headers
 rm -v /boot/loader/entries/void-*
 rm -v /boot/config-6.12.53_1
 rm -v /boot/initramfs-6.12.53_1.img
@@ -198,8 +199,9 @@ cp nanorc $HOME/.nanorc
 cp -r vim $HOME/.vim
 cp vimrc $HOME/.vimrc
 cp xprofile $HOME/.xprofile
+cp Xresources $HOME/.Xresources
 cp zshrc $HOME/.zshrc
-sudo xbps-install -u -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime
+sudo xbps-install -u -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime fcitx5-gtk+2 fcitx5-gtk+3 fcitx5-gtk-devel fcitx5-gtk4 fcitx5-qt fcitx5-qt5 fcitx5-qt6
 cd /data/git/DarkarchWM
 sudo cp -rf system/usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
 sudo cp -rf system/usr/share/fonts/Meslo /usr/share/fonts && \
@@ -235,22 +237,41 @@ xbps-reconfigure -fa
 ``` bash
 # 修复背光调节
 sudo xbps-install -S brightnessctl
-brightnessctl
+brightnessctl # 记录名称
 su alarm
-groups  # 确认包含video组
+groups  # 确认有video组
 sudo usermod -aG video $USER
+vim $HOME/.config/polybar/config.ini
 reboot
-# 修复电池显示
+
+# 修复电池
 ls -1 /sys/class/power_supply/
 vim $HOME/.config/polybar/config.ini
-# 修复声音调节
+
+# 修复声音
 xbps-install -u pulseaudio
-# 修复网络显示
-ip addr # 记录名字
-vim $HOME/.config/polybar/config.ini # 写入设备名
-# 修复linux固件
+sudo usermod -aG audio $(whoami)
+mkdir -p /etc/udev/rules.d
+sudo cp app/volume/91-pulseaudio-snd.rules /etc/udev/rules.d
+sudo udevadm control --reload
+sudo udevadm trigger --subsystem-match=sound
+xinput list-props <number> # 检查设备事件编号
+sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf # 变更配置
+sudo vim /usr/share/X11/xorg.conf.d/41-libinput.conf # 变更配置
+ls -l /dev/snd/ # 确认设备
+sudo cp -rf app/volume/udev-trigger-sound /etc/sv
+sudo chmod +x /etc/sv/udev-trigger-sound/run
+sudo ln -s /etc/sv/udev-trigger-sound /etc/runit/runsvdir/default
+sudo reboot
+
+# 修复网络
+ip addr # 记录设备
+vim $HOME/.config/polybar/config.ini
+
+# 修复固件
 sudo xbps-install -u linux-firmware
-# 修复时区
+
+# 调整时区
 ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```

@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "Running udevadm trigger for sound devices..."
+/sbin/udevadm control --reload
+/sbin/udevadm trigger --subsystem-match=sound
+echo "Finished."
