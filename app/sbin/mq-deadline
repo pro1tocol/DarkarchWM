@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo echo mq-deadline | sudo tee /sys/block/*/queue/scheduler
