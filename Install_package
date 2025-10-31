@@ -10,4 +10,4 @@ xbps-install -u -y xterm kitty dolphin gwenview mpv plasma-pa plasma-nm plasma-t
 xbps-install -u -y breeze-gtk breeze systemsettings kscreen powerdevil gnome-screenshot gnome-calculator && \
 xbps-install -u -y fastfetch kde-gtk-config qt5ct qt6ct breeze breeze-icons polybar && \
 xbps-install -u -y picom screenkey slop lxdm i3 rofi ranger w3m w3m-img kde-plasma && \
-xbps-install -u -y imlib2 vscode putty firefox feh xfsprogs xinit xorg
+xbps-install -u -y imlib2 vscode putty firefox feh xfsprogs xinit xorg tlp
