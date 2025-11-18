@@ -125,8 +125,8 @@ cat /etc/fstab # show storage status(record UUID)
 bootctl install
 cd /boot
 sudo vim loader/loader.conf # change the boot way
-	  default DarkarchWM.conf
-	  timeout 10
+    default DarkarchWM.conf
+    timeout 10
     console-mode max
     editor no
 sudo vim loader/entries/DarkarchWM.conf
