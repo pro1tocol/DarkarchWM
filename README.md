@@ -223,6 +223,15 @@ mkinitcpio -p linux-lts && reboot
 ``` shell
 sudo systemctl start lxdm.service
 ```
+---
+### Make all done
+``` shell
+su alarm
+cd /data/git/DarkarchWM_lts/dotfiles/USER/config
+cp -rf ./* $HOME/.config
+su root
+mkinitcpio -p linux-lts
+```
 #### Install all applications(options)
 ``` shell
 yay -S libvirt qemu-base virt-manager virt-install bridge-utils dnsmasq openbsd-netcat
