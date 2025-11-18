@@ -1,6 +1,7 @@
-XTerm*faceName: MesloLGMDZ Nerd Font Mono
-XTerm*faceNameDoublesize: Microsoft YaHei UI
-xterm*faceSize: 12
+XTerm*faceName: MesloLGM Nerd Font
+XTerm*faceNameDoublesize: Microsoft YaHei
+xterm*faceSize: 14
+xterm*vt100*geometry: 106x32
 xterm*saveLines: 16384
 xterm*scrollBar: false
 xterm*termName: xterm-color

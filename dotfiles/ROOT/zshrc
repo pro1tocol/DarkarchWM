@@ -18,7 +18,7 @@ esac
 autoload -U colors && colors
 
 NEWLINE=$'\n'
-PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[cyan]%}[%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%T) %{$reset_color%}%b"
+PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*) %{$reset_color%}%b"
 
 autoload -U compinit
 compinit
@@ -78,6 +78,7 @@ fi
 alias ll='ls -lF --color=auto -lAF'
 alias l='ls -l --color=auto'
 alias ls='ls --color=auto'
+alias cls='clear'
 alias netr="netstat -rn"
 alias netp="netstat -ant | grep LISTEN"
 alias netu="netstat -anut | grep udp"

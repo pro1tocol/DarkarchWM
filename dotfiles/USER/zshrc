@@ -18,7 +18,7 @@ esac
 autoload -U colors && colors
 
 NEWLINE=$'\n'
-PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*) %{$reset_color%}%b"
+PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[cyan]%}[%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%T) %{$reset_color%}%b"
 
 autoload -U compinit
 compinit
@@ -38,6 +38,8 @@ force_color_prompt=yes
 HISTFILE=~/.zsh_history
 HISTSIZE=100
 SAVEHIST=50
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=10
 setopt appendhistory
 #set -o vi
 bindkey -v
@@ -78,7 +80,13 @@ fi
 alias ll='ls -lF --color=auto -lAF'
 alias l='ls -l --color=auto'
 alias ls='ls --color=auto'
+alias cls='clear'
+alias nmap='sudo nmap'
+alias btop='sudo btop'
+alias nmtui='sudo nmtui'
+alias reboot='sudo reboot'
+alias poweroff='sudo poweroff'
 alias netr="netstat -rn"
 alias netp="netstat -ant | grep LISTEN"
 alias netu="netstat -anut | grep udp"
-alias neta="netstat -anotp"
+alias neta="sudo netstat -anotp"

@@ -11,11 +11,9 @@ set $mod2 Mod4
 
 # hidden title
 font pango:MesloLGM Nerd Font, Microsoft YaHei 8
-#font pango:SFMono Nerd Font Mono, Microsoft YaHei 18
 for_window [class="^.*"] border pixel 0
 
 # Default Environment
-#exec --no-startup-id $HOME/.config/i3/sh/touchpad.sh
 #the touchpad from /usr/share/X11/xorg.conf.d/70-synaptics.conf support
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id nm-applet
@@ -36,7 +34,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # Setup System
-#for_window [class="XTerm"] floating enable
+for_window [class="XTerm"] floating enable
 #bindsym $mod+F1 exec xterm
 bindsym $mod+F1 exec kitty
 bindsym $mod+q kill
@@ -113,26 +111,14 @@ bindsym $mod+e layout toggle split
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-		#output primary
+bar {
         #position top
-		#font pango:MesloLGM Nerd Font, Microsoft YaHei 12
-		#workspace_buttons yes
-		#i3bar_command i3bar --transparency
-		#status_command i3blocks
-		#separator_symbol " "
-        #colors {
-                #background #00000000
-                #statusline #6298e0FF
-                #separator #6298e0FF
-                
-                #focused_workspace #6298e0FF #00000000 #6298e0FF #00000000
-                #active_workspace #00000000 #6298e0FF #00000000 #6298e0FF
-                #inactive_workspace #00000000 #6298e0FF #00000000 #6298e0FF
-                #urgent_workspace #6298e0FF #00000000 #6298e0FF #00000000
-                #binding_mode #6298e0FF #00000000 #6298e0FF #00000000
-        #}
-#}
+		font pango:MesloLGM Nerd Font, Microsoft YaHei 12
+		workspace_buttons no
+        colors {
+                background #00000000
+        }
+}
 
 # Setup picom
 exec_always picom -b
