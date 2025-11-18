@@ -69,7 +69,7 @@ echo 'Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch' > /etc/pacm
 sudo pacman-key --init && sudo pacman-key --populate archlinux
 sudo pacman -Syy && sudo pacman -S archlinux-keyring
 pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode/amd-ucode # install testing 
-bash Install.sh
+wget https://raw.githubusercontent.com/pro1tocol/DarkarchWM/refs/heads/lts/Install.sh && bash Install.sh
 genfstab -U /mnt > /mnt/etc/fstab # write to fstab
 cat /mnt/etc/fstab # show writing status
 ```
@@ -156,30 +156,25 @@ pacman -S archlinux-keyring archlinuxcn-keyring && pacman -S yay
 ---
 ### Create admin user
 ``` shell
-useradd -m -G wheel -s /bin/zsh alarm # create user
+mkdir -p /data/home
+useradd -m -b /data/home -s /bin/zsh alarm # create user
 passwd alarm
 # modify permissions
 EDITOR=vim visudo
-%wheel ALL=(ALL: ALL) ALL
+  alarm ALL=(ALL: ALL) ALL
 # adjust path permissions
 sudo chown alarm:alarm -R /data
-cd /data/git/DarkarchWM_lts/zsh/USER
+cd /data/git/DarkarchWM_lts/dotfiles/USER
 su alarm
-cp inputrc /home/alarm/.inputrc
-cp nanorc /home/alarm/.nanorc
-cp vimrc /home/alarm/.vimrc
-cp xprofile /home/alarm/.xprofile
-cp Xresources /home/alarm/.Xresources
-cp zshrc /home/alarm/.zshrc
+cp inputrc $HOME/.inputrc
+cp nanorc $HOME/.nanorc
+cp vimrc $HOME/.vimrc
+cp xprofile $HOME/.xprofile
+cp Xresources $HOME/.Xresources
+cp zshrc $HOME/.zshrc
 exit
 ```
-### Fix kernel mkinitcpio
-``` shell
-yay -S fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime # install the input method
-exit
-mkinitcpio -p linux-lts # fix model
-```
-### Install tool nad graphics device
+### Install graphics device and input method
 ``` shell
 su alarm
 # intel
@@ -195,6 +190,9 @@ yay -S nvidia-open-lts nvidia-settings lib32-nvidia-utils nvidia-utils
 
 # Nvidia
 yay -S nvidia-lts nvidia-settings lib32-nvidia-utils nvidia-utils
+
+# Input method
+yay -S fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime # install the input method
 ```
 #### DarkarchWM required component
 ``` shell
@@ -203,21 +201,22 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' && \
 gsettings get org.gnome.desktop.interface color-scheme
 # install fonts
 su root
-sudo cp -rf usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
-sudo cp -rf usr/share/fonts/Meslo /usr/share/fonts && \
-sudo cp -rf usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
-sudo cp -rf usr/share/gtk-* /usr/share && \
-sudo cp -rf usr/share/qt* /usr/share && \
-sudo cp -rf usr/share/lxdm/themes/BlackArch /usr/share/lxdm/themes && \
-sudo cp usr/share/rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes && \
-sudo cp usr/share/X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d && \
-sudo cp etc/environment /etc/environment && \
-sudo cp etc/lxdm/lxdm.conf /etc/lxdm && \
-sudo cp etc/pam.d/lxdm /etc/pam.d && \
-sudo cp etc/profile /etc && \
-sudo cp etc/profile.d/offbeep.sh.bak /etc/profile.d && \
-sudo cp etc/profile.d/append_path.sh /etc/profile.d && \
-sudo cp etc/systemd/logind.conf /etc/systemd && \
+sudo cp -rf system/usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
+sudo cp -rf system/usr/share/fonts/Meslo /usr/share/fonts && \
+sudo cp -rf system/usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
+sudo cp -rf system/usr/share/gtk-* /usr/share && \
+sudo cp -rf system/usr/share/qt* /usr/share && \
+sudo cp -rf system/usr/share/lxdm/themes/BlackArch /usr/share/lxdm/themes && \
+sudo cp system/usr/share/rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes && \
+sudo cp system/usr/share/X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d && \
+sudo cp system/etc/environment /etc/environment && \
+sudo cp system/etc/tlp.conf /etc/tlp.conf && \
+sudo cp system/etc/lxdm/lxdm.conf /etc/lxdm && \
+sudo cp system/etc/pam.d/lxdm /etc/pam.d && \
+sudo cp system/etc/profile /etc && \
+sudo cp system/etc/profile.d/offbeep.sh.bak /etc/profile.d && \
+sudo cp system/etc/profile.d/append_path.sh /etc/profile.d && \
+sudo cp system/etc/systemd/logind.conf /etc/systemd && \
 mkinitcpio -p linux-lts && reboot
 ```
 #### DarkarchWM is loaded for testing
@@ -226,9 +225,22 @@ sudo systemctl start lxdm.service
 ```
 #### Install all applications(options)
 ``` shell
+yay -S libvirt qemu-base virt-manager virt-install bridge-utils dnsmasq openbsd-netcat
 yay -S nmap wireshark-qt wireshark-cli reaver bully cowpatty macchanger hashcat hcxdumptool hcxtools
 yay -S pyrit pixiewps wifite john wireshark-cli ruby
 yay -S qt6ct-kde
+
+# flatpak use other sources 
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub
+# reset: sudo flatpak remote-modify flathub --url=https://dl.flathub.org/repo
+sudo flatpak remotes --show-details
+sudo flatpak search wechat
+# flatpak install <Application_ID>
+
+# libvirt setup network
+sudo cp app/10-vlan.xml /etc/libvirt/qemu/networks
+sudo virsh net-define vlan10
 ```
 
 ## Shortcut keys
