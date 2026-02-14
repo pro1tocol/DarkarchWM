@@ -319,4 +319,5 @@ hwclock --systohc
 # Win + Shift + 2 : move window to workspace 2
 # Alt + Shift + l : move window to right
 # Win + f : resize window to bigger
+sudo vkpurge rm all #: ro remove all old kernel
 ```

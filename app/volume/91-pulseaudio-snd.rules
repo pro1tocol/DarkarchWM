@@ -1,3 +1,0 @@
-SUBSYSTEM=="sound", KERNEL=="controlC*", GROUP="audio", MODE="0660"
-SUBSYSTEM=="sound", KERNEL=="pcmC*D*p", GROUP="audio", MODE="0660"
-SUBSYSTEM=="sound", KERNEL=="pcmC*D*c", GROUP="audio", MODE="0660"
