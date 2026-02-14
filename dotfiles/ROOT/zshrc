@@ -17,8 +17,9 @@ esac
 
 autoload -U colors && colors
 
+setopt prompt_subst
 NEWLINE=$'\n'
-PS1="%B %{$fg[cyan]%}[%M] %{$fg[yellow]%}- %{$fg[red]%}💀 [%n] %{$fg[yellow]%}> %{$fg[green]%}%U[%~]%u%b${NEWLINE} %{$fg[green]%}(%*) %{$reset_color%}%b"
+PS1='%B %{$fg[green]%}[%U%~%u]%u%b %F{cyan}$(printf "%0.s─" {1..$((COLUMNS - ${#${(%):-[%~]%T}} - 6))})%f %B%F{yellow} %T%f'${NEWLINE}' %{$fg[red]%}💀 [%n] %{$fg[blue]%}> %{$reset_color%}%b'
 
 autoload -U compinit
 compinit
