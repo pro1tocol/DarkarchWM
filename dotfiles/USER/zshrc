@@ -1,7 +1,4 @@
-#
 # ~/.zshrc
-#
-#
 # Plugins into zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -85,9 +82,9 @@ alias cls='clear'
 alias nmap='sudo nmap'
 alias btop='sudo btop'
 alias nmtui='sudo nmtui'
-alias reboot='sudo reboot'
-alias poweroff='sudo poweroff'
 alias netr="netstat -rn"
 alias netp="netstat -ant | grep LISTEN"
 alias netu="netstat -anut | grep udp"
 alias neta="sudo netstat -anotp"
+alias reboot='sudo reboot'
+alias poweroff='sudo poweroff'
