@@ -6,18 +6,20 @@
 
 ## Build the Environment
 
-| Standards | Kernel | Displays | WM | Shell | Text |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| DarkarchWM_v4.21.03 | linux6.13-6.13.12_1 | Xorg/X11 | I3wm | zsh/bash | vim-molokai |
+| Standards | Kernel | Displays | WM | Shell | Text | App |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| DarkarchWM_v4.21.03 | linux6.13-6.13.12_1 | Xorg/X11 | I3wm | zsh/bash | vim-molokai | Flatpak |
 ## See
 
 ![image](png/firefox.png)
 
 ## Support
-| Bright | Volume | Touchpad | Indicator | Launcher | Application | Virtual | Container |
-| :--- | :--- | :--- | :--- | :--- |  :--- | :--- | :--- |
+| Bright | Volume | Touchpad | Indicator | Launcher | Application | Virtual | Container | Network |
+| :--- | :--- | :--- | :--- | :--- |  :--- | :--- | :--- | :--- |
 
 ---
+
+## Quick Start
 
 # Step 1:
 #### Prerequisites for Installing DarkarchWM:
