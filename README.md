@@ -33,7 +33,7 @@ sed -i 's|https://repo-default.voidlinux.org|https://mirrors.tuna.tsinghua.edu.c
 ```
 ##### Update sources and package manager
 ``` shell
-xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-progs xfsprogs
+xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-progs xfsprogs git
 ```
 - 3.Set up [storage](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Storage.md) partitions in the USB Live Environment, ensuring at least a boot partition and a root filesystem partition are created.
 
@@ -42,7 +42,7 @@ xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-pr
 # Step 2:
 ### Install basic system
 ``` bash
-xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc g++ make cmake autoconf automake libtool pkg-config
+xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc make cmake autoconf automake libtool pkg-config
 ```
 ##### Clone repository
 ``` bash
@@ -64,7 +64,9 @@ cd /data/git/DarkarchWM_void && make clean && make -j4
 ```
 ##### Run the build script
 ``` shell
-chown +x run.sh setup.sh wakeup.sh copy.sh
+chmod +x run.sh setup.sh wakeup.sh copy.sh
+mkdir -p /etc/xbps.d && cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://repo-default.voidlinux.org|https://mirrors.tuna.tsinghua.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
 ./run.sh && ./setup.sh && ./wakeup.sh
 bootctl list
 bin/sshd_build
@@ -91,7 +93,7 @@ sudo bin/fcitx5_build
 # First launch test of DarkarchWM's LXDM
 sudo ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
 # Configuration fully copied after successful startup
-cd /data/git/DarkarchWM/dotfiles/USER/config
+cd /data/git/DarkarchWM_void/dotfiles/USER/config
 cp -rf ./* $HOME/.config
 ```
 

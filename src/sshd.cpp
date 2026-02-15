@@ -64,6 +64,6 @@ int main() {
     system(moveCmd.c_str());
     std::string chmodCmd = "chmod 600 " + configFile;
     system(chmodCmd.c_str());
-    std::cout << "sshd_config updated. Restart SSH service with: systemctl restart sshd" << std::endl;
+    std::cout << "sshd_config updated. Restart SSH service with: sudo sv restart sshd" << std::endl;
     return 0;
 }
