@@ -1,4 +1,4 @@
-![image](./png/DarkarchWM.png)
+![image](./png/DarkarchWM_2026.png)
 
 ### <p align="right"> Option: [中文](language/Chinese.md) </p>
 
