@@ -5,6 +5,7 @@ sudo xbps-install -uy gcc cmake make patch
 ```
 #### Install the lock screen tool i3-lock
 ``` shell
+sudo xbps-install -uy libev-devel xcb-util-devel xcb-util-xrm-devel xcb-util-image-devel libxkbcommon-devel cairo-devel libjpeg-turbo-devel giflib-devel pam-devel
 cd /data/git && git clone https://github.com/Raymo111/i3lock-color.git && cd i3lock-color
 ./build.sh
 ./install-i3lock-color.sh
