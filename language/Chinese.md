@@ -1,5 +1,5 @@
 
-![image](/png/DarkarchWM.png)
+![image](/png/DarkarchWM_2026.png)
 
 ### <p align="right"> Option: [English](/README.md) </p>
 
