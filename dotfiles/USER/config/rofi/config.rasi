@@ -1,4 +1,4 @@
 configuration {
-	font: "Microsoft YaHei 22";
+	font: "Orbitron 16";
 	show-icons: false;
 }
