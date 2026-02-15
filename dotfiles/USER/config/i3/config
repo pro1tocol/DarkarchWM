@@ -113,7 +113,7 @@ bindsym $mod+e layout toggle split
 # finds out, if available)
 bar {
         #position top
-		font pango:MesloLGM Nerd Font, Microsoft YaHei 12
+		font pango:MesloLGM Nerd Font, Microsoft YaHei 4
 		workspace_buttons no
         colors {
                 background #00000000
@@ -121,7 +121,7 @@ bar {
 }
 
 # Setup picom
-exec_always picom -b
+#exec_always picom -b
 
 # Setup background
 exec_always --no-startup-id feh --randomize --bg-fill $HOME/.config/i3/wallpaper.jpg
