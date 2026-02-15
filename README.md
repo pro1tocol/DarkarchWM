@@ -6,49 +6,26 @@
 
 ## Build the Environment
 
-  | Standards | x86_64           | Dependence                                                                                        |
-  | :--- | :--- | :--- |
-  | Kernel    | linux 6.6           | runit                                                                                       |
-  | Lander    | lxdm                 | breeze-dark                                                                                  |
-  | Manager   | i3              | gtk/qt                                                                    |
-  | Displays  | Xorg                  | picom/rofi/polybar                                                                      |
-  | Shell     | kitty                | bash/zsh |
-  | Files     | dolphin       | xfs                                                                       |
-  | Fonts     | Microsoft/Meslo | copy                                                                                            |
-  | Text      | vim        | vim-molokai                                                                                       |
-  | Input     | fcitx5               | simple-dark                  |
-  | Sound     | pulseaudio             | xf86audio                                                                             |
-  | Bluetooth | bluez                | bluetoothctl                                                                                      |
-  | Light     | bright        | libinput                                                                                  |
-
+| Standards | Kernel | Displays | WM | Shell | Text |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| DarkarchWM_v4.21.03 | linux6.13-6.13.12_1 | Xorg/X11 | I3wm | zsh/bash | vim-molokai |
 ## See
 
 ![image](png/firefox.png)
 
 ## Support
-- ##### Bright
-- ##### Volume
-- ##### Touchpad
-- ##### Indicator
-- ##### Launcher
+| Bright | Volume | Touchpad | Indicator | Launcher |
+| :--- | :--- | :--- | :--- | :--- |
 
 ---
 
 ## Installation
-### Basic system(Based on [https://voidlinux.org/](https://voidlinux.org/))
-#### Connet setup
-``` bash
-# Manually network
-ip addr add 192.168.1.2/24 dev eth0
-ip route add default via 192.168.1.2 dev eth0
-echo 'nameserver 114.114.114.114' > /etc/resolv.conf
-# You need check network
-ping mirror.sjtu.edu.cn
-# Configure remote and run service
-vi /etc/ssh/sshd_config
-sv status sshd
-sv restart sshd
-```
+#### Prerequisites for Installing DarkarchWM:
+
+- 1.Download the Void Linux [ISO](https://voidlinux.org/)) image and successfully boot from a USB drive.
+- 2.Configure [network](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Internet.md) connectivity and test the connection within the USB Live Environment.
+- 3.Set up [storage](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Storage.md) partitions in the USB Live Environment, ensuring at least a boot partition and a root filesystem partition are created.
+
 #### Install some tools on basic system
 ``` bash
 # Change mirrors sources
