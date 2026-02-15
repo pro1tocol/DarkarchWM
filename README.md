@@ -19,7 +19,7 @@
 
 ---
 
-## Installation
+## Step 1:
 #### Prerequisites for Installing DarkarchWM:
 
 - 1.Download the Void Linux [ISO](https://voidlinux.org/)) image and successfully boot from a USB drive.
@@ -35,97 +35,47 @@ xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-pr
 ```
 - 3.Set up [storage](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Storage.md) partitions in the USB Live Environment, ensuring at least a boot partition and a root filesystem partition are created.
 
-#### Install basic system
+---
+
+## Step 2:
+### Install basic system
 ``` bash
-xbps-install -Sy -R https://mirror.sjtu.edu.cn/voidlinux/current -r /mnt base-system
+xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc g++ make cmake autoconf automake libtool pkg-config
 ```
 ##### Chroot to system and setup
 ``` bash
 # Generate List
 xgenfstab -U /mnt > /mnt/etc/fstab && cat /mnt/etc/fstab
+# Download DarkarchWM repository
+mkdir -p /mnt/data/git && cd /mnt/data/git
+git clone -b void --single-branch https://github.com/pro1tocol/DarkarchWM.git && mv DarkarchWM DarkarchWM_void && cd $HOME
+```
+
+---
+
+## Step 3:
+### Xchroot and build system
+``` shell
 xchroot /mnt /bin/bash
-# Change mirrors sources again
-mkdir -p /etc/xbps.d
-cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-sed -i 's|https://repo-default.voidlinux.org|https://mirror.sjtu.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
-xbps-install -Su && xbps-install -u -y zsh zsh-autosuggestions zsh-completions zsh-history-substring-search zsh-syntax-highlighting wget git
-# Download this repository
-mkdir -p /data/git && cd /data/git
-git clone https://github.com/pro1tocol/DarkarchWM.git && cd DarkarchWM
-# Run this script
-chmod +x Install_package && bash Install_package
+gcc --version && g++ --version && make --version
+cd /data/git/DarkarchWM_void && make clean && make -j4
 ```
-##### System init
-``` bash
-vim /etc/hostname # You need change hostname
-vim /etc/default/libc-locales # You need set language
-xbps-reconfigure -f glibc-locales
-# Set system display font
-echo "KEYMAP=us" > /etc/vconsole.conf && echo "FONT=lat9u-16" >> /etc/vconsole.conf
-# Create a user and grant permission
-useradd -m -G wheel -s /bin/zsh alarm
-EDITOR=vim visudo
-```
-##### Switch standard kernel
-``` bash
-xbps-query -Rs linux-lts
-xbps-install -u -y linux-lts-6.6_1 linux-lts-headers-6.6_1
-```
-##### Setup system boot
-``` bash
-xbps-install -u -y systemd-boot
-ls -l /boot # View linux kernel
-cat /etc/fstab # View partition UUID
-bootctl install
-cd /boot
-  echo 'default DarkarchWM.conf' > loader/loader.conf
-  echo 'timeout 3' >> loader/loader.conf
-  echo 'console-mode max' >> loader/loader.conf
-  echo 'editor no' >> loader/loader.conf
-cat loader/loader.conf
-  echo 'title   DarkarchWM' > loader/entries/DarkarchWM.conf
-  echo 'linux   /vmlinuz-6.6.111_1' >> loader/entries/DarkarchWM.conf
-  echo 'initrd  /initramfs-6.6.111_1.img' >> loader/entries/DarkarchWM.conf
-  echo 'options root=/dev/mapper/DarkarchWM-system ro rd.lvm.lv=DarkarchWM/system quiet' >> loader/entries/DarkarchWM.conf
-cat loader/entries/DarkarchWM.conf
-bootctl status # Check boot effective
-```
-##### Change repository permission and restore root dotfiles
-``` bash
-chown alarm:alarm -R /data
-cd /data/git/DarkarchWM/dotfiles/ROOT && cp -rf ./* $HOME
-mv $HOME/inputrc $HOME/.inputrc
-mv $HOME/nanorc $HOME/.nanorc
-mv $HOME/vim $HOME/.vim
-mv $HOME/vimrc $HOME/.vimrc
-mv $HOME/zshrc $HOME/.zshrc
-# Configure remote again
-vim /etc/ssh/sshd_config
-```
-##### Run tools at system startup
-``` bash
-echo 'nameserver 114.114.114.114' > /etc/resolv.conf
-ln -s /etc/sv/dbus /etc/runit/runsvdir/default/dbus
-ln -s /etc/sv/NetworkManager /etc/runit/runsvdir/default/NetworkManager
-ln -s /etc/sv/bluetoothd /etc/runit/runsvdir/default/bluetoothd
-ln -s /etc/sv/sshd /etc/runit/runsvdir/default/sshd
-# virtual machine vmware tools
-ln -s /etc/sv/vmtoolsd /etc/runit/runsvdir/default/vmtoolsd
-ln -s /etc/sv/vmware-vmblock-fuse /etc/runit/runsvdir/default/vmware-vmblock-fuse
-```
-#### All done and restart the system
-``` bash
+##### build
+``` shell
+chown +x run.sh setup.sh wakeup.sh
+./run.sh && ./setup.sh && ./wakeup.sh
+bootctl list
+bin/sshd_build
 chsh -s /bin/zsh
-# Application system font
-xbps-reconfigure -fa
-# Set Password
-passwd root
-passwd alarm
-# Quit and reboot
+passwd root && passwd $(echo $USER)
+```
+##### Exit xchroot and reboot
+``` shell
 exit
 umount -R /mnt
 shutdown -r now
 ```
+
 ---
 
 ### Graphical_settings
@@ -223,50 +173,4 @@ ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```
 ### Installation complete
-#### Below are the system shortcut keys
 
----
-
-## Keys
-
-#### The "Move" keys
-``` bash
-# h : left
-# j : down
-# k : up
-# l : right
-```
-#### The "Alt" Keys
-``` bash
-# Alt + F1 : open terminal
-# Alt + q : close window
-# Alt + p : open screenkey
-# Alt + c : open vscode
-# Alt + f : open firefox
-# Alt + s : open gsettings
-# Alt + Shift + r : restart window manager
-# Alt + Shift + q : exit window manager
-# Alt + mouse_left : move window
-# Alt + mouse_right : resize window
-```
-
-#### The "WIn/Option" Keys
-``` bash
-# Win + r : run command
-# Win + d : run desktop application
-# Win + q : window to lock
-# Win + 1 : to workspace 1
-# Win + 2 : to workspace 2
-# Win + 3 : to workspace 3
-# Win + Shift + 1 : take window to workspace 1
-# Win + Shift + 2 : take window to workspace 2
-# Win + Shift + 3 : take window to workspace 3
-```
-
-##### Example
-``` bash
-# Win + Shift + 2 : move window to workspace 2
-# Alt + Shift + l : move window to right
-# Win + f : resize window to bigger
-sudo vkpurge rm all #: ro remove all old kernel
-```
