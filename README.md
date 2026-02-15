@@ -14,8 +14,8 @@
 ![image](png/firefox.png)
 
 ## Support
-| Bright | Volume | Touchpad | Indicator | Launcher |
-| :--- | :--- | :--- | :--- | :--- |
+| Bright | Volume | Touchpad | Indicator | Launcher | Application | Virtual | Container |
+| :--- | :--- | :--- | :--- | :--- |  :--- | :--- |
 
 ---
 
@@ -24,45 +24,17 @@
 
 - 1.Download the Void Linux [ISO](https://voidlinux.org/)) image and successfully boot from a USB drive.
 - 2.Configure [network](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Internet.md) connectivity and test the connection within the USB Live Environment.
+##### Change mirrors sources(Options)
+``` shell
+mkdir -p /etc/xbps.d && cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://repo-default.voidlinux.org|https://mirrors.tuna.tsinghua.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
+```
+##### Update sources and package manager
+``` shell
+xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-progs xfsprogs
+```
 - 3.Set up [storage](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Storage.md) partitions in the USB Live Environment, ensuring at least a boot partition and a root filesystem partition are created.
 
-#### Install some tools on basic system
-``` bash
-# Change mirrors sources
-mkdir -p /etc/xbps.d
-cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
-sed -i 's|https://repo-default.voidlinux.org|https://mirror.sjtu.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
-xbps-install -S && xbps-install -u xbps 
-# Install tools
-xbps-install -u vim fastfetch btop tzdata parted libstdc++-14.2.1+20250405_2
-# You can search some tools in this command
-# xbps-query -Rs nano
-```
-#### Create file system on storage
-``` bash
-# Create partition
-parted /dev/nvme0n1
-mklabel gpt
-mkpart ESP 4096s 769M
-mkpart primary 769M -1
-set 1 boot on
-p
-# "q" to quit
-# Format the boot
-mkfs.fat -F 32 /dev/nvme0n1p1
-# Format the file system and mount
-pvcreate /dev/nvme0n1p2
-vgcreate DarkarchWM /dev/nvme0n1p2
-lvcreate -l +100%FREE DarkarchWM -n system
-# Format the new LVM2 partition
-mkfs.xfs /dev/mapper/DarkarchWM-system
-# Mount file system
-mount /dev/mapper/DarkarchWM-system /mnt
-mount --mkdir /dev/nvme0n1p1 /mnt/boot
-# Check the LVM partition status
-lvs 
-df -h
-```
 #### Install basic system
 ``` bash
 xbps-install -Sy -R https://mirror.sjtu.edu.cn/voidlinux/current -r /mnt base-system
