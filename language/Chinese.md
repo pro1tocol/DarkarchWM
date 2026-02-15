@@ -34,7 +34,7 @@ sed -i 's|https://repo-default.voidlinux.org|https://mirrors.tuna.tsinghua.edu.c
 ```
 ##### 升级源及包管理工具
 ``` shell
-xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-progs xfsprogs
+xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-progs xfsprogs git
 ```
 - 3.在 USB Live 环境中设置[存储](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Storage.md)分区，确保至少创建一个启动分区和一个根文件系统分区。
 
@@ -43,7 +43,7 @@ xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-pr
 # 步骤 2:
 ### 安装经典系统
 ``` bash
-xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc g++ make cmake autoconf automake libtool pkg-config
+xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc make cmake autoconf automake libtool pkg-config
 ```
 ##### 克隆仓库
 ``` bash
@@ -65,7 +65,9 @@ cd /data/git/DarkarchWM_void && make clean && make -j4
 ```
 ##### 运行构建脚本
 ``` shell
-chown +x run.sh setup.sh wakeup.sh copy.sh
+chmod +x run.sh setup.sh wakeup.sh copy.sh
+mkdir -p /etc/xbps.d && cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+sed -i 's|https://repo-default.voidlinux.org|https://mirrors.tuna.tsinghua.edu.cn/voidlinux|g' /etc/xbps.d/*-repository-*.conf
 ./run.sh && ./setup.sh && ./wakeup.sh
 bootctl list
 bin/sshd_build
