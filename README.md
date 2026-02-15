@@ -99,3 +99,4 @@ cp -rf ./* $HOME/.config
 
 ### Installation complete
 ##### Some known issues: [check](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Issues.md)
+##### More tools: [check](https://github.com/pro1tocol/DarkarchWM/blob/void/language/Tools.md)
