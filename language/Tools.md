@@ -13,11 +13,11 @@ cd /data/git && git clone https://github.com/Raymo111/i3lock-color.git && cd i3l
 ``` shell
 sudo xbps-install -uy docker docker-compose
 sudo mkdir -p /etc/docker
-vim /etc/docker/daemon.json
-ln -s /etc/sv/containerd  /etc/runit/runsvdir/default/containerd
-ln -s /etc/sv/docker /etc/runit/runsvdir/default/docker
-sv status containerd
-sv status docker
+sudo cp app/docker/daemon.json /etc/docker
+sudo ln -s /etc/sv/containerd  /etc/runit/runsvdir/default/containerd
+sudo ln -s /etc/sv/docker /etc/runit/runsvdir/default/docker
+sudo sv status containerd
+sudo sv status docker
 ```
 #### Install container application Flatpak
 ``` shell
@@ -33,15 +33,15 @@ flatpak list # show application list
 #### Install and deploy a KVM virtualization environment
 ``` shell
 sudo xbps-install -uy libvirt virt-manager qemu bridge-utils dnsmasq
-ln -s /etc/sv/libvirtd /etc/runit/runsvdir/default/libvirtd
-ln -s /etc/sv/virtlogd /etc/runit/runsvdir/default/virtlogd
+sudo ln -s /etc/sv/libvirtd /etc/runit/runsvdir/default/libvirtd
+sudo ln -s /etc/sv/virtlogd /etc/runit/runsvdir/default/virtlogd
 sudo cp app/virtual-conf/50-libvirt.rules /etc/polkit-1/rules.d
 sudo usermod -a -G libvirt $USER
 sudo usermod -a -G libvirt root
 sudo usermod -a -G kvm $USER
 sudo usermod -a -G kvm root
-sv restart libvirtd
-sv restart virtlogd
+sudo sv restart libvirtd
+sudo sv restart virtlogd
 # networks path: " /etc/libvirt/qemu/networks/autostart "
 # delete default network
 sudo virsh net-destroy default

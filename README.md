@@ -44,7 +44,7 @@ xbps-install -S && xbps-install -uy xbps && xbps-install -uy vim parted btrfs-pr
 ``` bash
 xbps-install -Sy -R https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current -r /mnt base-container-full linux6.13-6.13.12_1 linux6.13-headers-6.13.12_1 base-devel gcc g++ make cmake autoconf automake libtool pkg-config
 ```
-##### Chroot to system and setup
+##### Clone repository
 ``` bash
 # Generate List
 xgenfstab -U /mnt > /mnt/etc/fstab && cat /mnt/etc/fstab
