@@ -15,7 +15,7 @@
 
 ## Support
 | Bright | Volume | Touchpad | Indicator | Launcher | Application | Virtual | Container |
-| :--- | :--- | :--- | :--- | :--- |  :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |  :--- | :--- | :--- |
 
 ---
 
@@ -60,9 +60,9 @@ xchroot /mnt /bin/bash
 gcc --version && g++ --version && make --version
 cd /data/git/DarkarchWM_void && make clean && make -j4
 ```
-##### build
+##### Run the build script
 ``` shell
-chown +x run.sh setup.sh wakeup.sh
+chown +x run.sh setup.sh wakeup.sh copy.sh
 ./run.sh && ./setup.sh && ./wakeup.sh
 bootctl list
 bin/sshd_build
@@ -78,58 +78,26 @@ shutdown -r now
 
 ---
 
-### Graphical_settings
-#### User configuration
+## Step 4:
+##### Configuration performed after the DarkarchWM reboot
+### User base setup
 ``` bash
-# Enter the system after reboot
-# Uninstall kernel
-xbps-remove -R linux linux-headers
-rm -v /boot/loader/entries/void-*
-rm -v /boot/config-6.12.53_1
-rm -v /boot/initramfs-6.12.53_1.img
-rm -v /boot/vmlinuz-6.12.53_1
-reboot # again
-# Enter user configuration
-su alarm
-cd /data/git/DarkarchWM/dotfiles/USER
-cp inputrc $HOME/.inputrc
-cp nanorc $HOME/.nanorc
-cp -r vim $HOME/.vim
-cp vimrc $HOME/.vimrc
-cp xprofile $HOME/.xprofile
-cp Xresources $HOME/.Xresources
-cp zshrc $HOME/.zshrc
-sudo xbps-install -u -y fcitx5 fcitx5-configtool fcitx5-gtk fcitx5-rime fcitx5-gtk+2 fcitx5-gtk+3 fcitx5-gtk-devel fcitx5-gtk4 fcitx5-qt fcitx5-qt5 fcitx5-qt6
-cd /data/git/DarkarchWM
-sudo cp -rf system/usr/share/fonts/Windows-to-Linux-Fonts /usr/share/fonts && \
-sudo cp -rf system/usr/share/fonts/Meslo /usr/share/fonts && \
-sudo cp -rf system/usr/share/fcitx5/themes/DarkarchWM /usr/share/fcitx5/themes && \
-sudo cp -rf system/usr/share/gtk-* /usr/share && \
-sudo cp -rf system/usr/share/qt* /usr/share && \
-sudo cp -rf system/usr/share/lxdm/themes/BlackArch /usr/share/lxdm/themes && \
-sudo cp system/usr/share/rofi/themes/DarkarchWM.rasi /usr/share/rofi/themes && \
-sudo cp system/usr/share/X11/xorg.conf.d/* /usr/share/X11/xorg.conf.d && \
-sudo cp system/etc/environment /etc/environment && \
-sudo cp system/etc/profile /etc/ && \
-sudo cp system/etc/profile.d/offbeep.sh.bak /etc/profile.d && \
-sudo cp system/etc/profile.d/append_path.sh /etc/profile.d && \
-sudo cp system/etc/lxdm/lxdm.conf /etc/lxdm && \
-sudo cp system/etc/pam.d/lxdm /etc/pam.d && \
-sudo cp -r system/usr/share/themes/Breeze-Dark /usr/share/themes
-```
-#### DarkarchWM First run
-``` bash
-su root
-ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
-```
-#### Continue user configuration
-``` bash
-su alarm
+# $USER is the user you just created
+su $USER
+sudo bin/fcitx5_build
+./copy.sh
+# First launch test of DarkarchWM's LXDM
+sudo ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
+# Configuration fully copied after successful startup
 cd /data/git/DarkarchWM/dotfiles/USER/config
 cp -rf ./* $HOME/.config
-exit
-xbps-reconfigure -fa
 ```
+
+---
+
+### Installation complete
+##### Some known issues: [check]()
+
 #### After entering DarkarchWM
 #### Fix related functions
 ``` bash
@@ -172,5 +140,4 @@ sudo xbps-install -u linux-firmware
 ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc
 ```
-### Installation complete
 
