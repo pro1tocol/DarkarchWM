@@ -24,4 +24,15 @@ FONT=lat9u-16
 EOF
 useradd -m -d "$USER_HOME" -G wheel -s /bin/zsh "$USERNAME"
 sed -i 's/^#\s*%wheel\s*ALL=(ALL:ALL)\s*ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
-echo "DarkarchWM user setup done!"
+chown $USERNAME:$USERNAME -R /data
+cd /data/git/DarkarchWM_void/dotfiles/ROOT && cp -rf ./* $HOME
+mv $HOME/inputrc $HOME/.inputrc
+mv $HOME/nanorc $HOME/.nanorc
+mv $HOME/vim $HOME/.vim
+mv $HOME/vimrc $HOME/.vimrc
+mv $HOME/zshrc $HOME/.zshrc
+ln -s /etc/sv/dbus /etc/runit/runsvdir/default/dbus
+ln -s /etc/sv/NetworkManager /etc/runit/runsvdir/default/NetworkManager
+ln -s /etc/sv/bluetoothd /etc/runit/runsvdir/default/bluetoothd
+ln -s /etc/sv/sshd /etc/runit/runsvdir/default/sshd
+echo "DarkarchWM setup done!"
