@@ -25,5 +25,7 @@ sudo usermod -aG audio $(whoami)
 sudo xbps-install -uy linux-firmware
 ```
 #### Fix timezone
+``` shell
 sudo ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 sudo hwclock --systohc
+```
