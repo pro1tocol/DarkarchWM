@@ -94,7 +94,7 @@ sudo bin/fcitx5_build
 # 首次启动 LXDM 登陆器
 sudo ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
 # 启动成功后进行全部配置
-cd /data/git/DarkarchWM/dotfiles/USER/config
+cd /data/git/DarkarchWM_void/dotfiles/USER/config
 cp -rf ./* $HOME/.config
 ```
 

@@ -93,7 +93,7 @@ sudo bin/fcitx5_build
 # First launch test of DarkarchWM's LXDM
 sudo ln -s /etc/sv/lxdm /etc/runit/runsvdir/default/lxdm
 # Configuration fully copied after successful startup
-cd /data/git/DarkarchWM/dotfiles/USER/config
+cd /data/git/DarkarchWM_void/dotfiles/USER/config
 cp -rf ./* $HOME/.config
 ```
 
